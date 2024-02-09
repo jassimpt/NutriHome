@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
+import 'package:nutrihome/views/phoneauthscreen.dart';
+import 'package:nutrihome/views/registerscreen.dart';
 import 'package:nutrihome/views/widgets/custombutton.dart';
 import 'package:nutrihome/views/widgets/customdivider.dart';
 import 'package:nutrihome/views/widgets/customtextfield.dart';
@@ -104,7 +106,11 @@ class LoginScreen extends StatelessWidget {
                 TileButton(
                   size: size,
                   image: 'assets/icons/iphone 1.png',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const PhoneAuthScreen(),
+                    ));
+                  },
                 ),
               ],
             ),
@@ -119,7 +125,13 @@ class LoginScreen extends StatelessWidget {
                   style:
                       GoogleFonts.urbanist(fontSize: 14, color: Colors.white)),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegisterScreen(),
+                      ));
+                },
                 child: Text('Register Now',
                     style:
                         GoogleFonts.urbanist(fontSize: 14, color: extracolor)),

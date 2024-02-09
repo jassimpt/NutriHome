@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
+import 'package:nutrihome/views/loginscreen.dart';
 import 'package:nutrihome/views/widgets/custombutton.dart';
-import 'package:nutrihome/views/widgets/customdivider.dart';
 import 'package:nutrihome/views/widgets/customtextfield.dart';
-import 'package:nutrihome/views/widgets/tilebutton.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -29,22 +28,17 @@ class RegisterScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Welcome back!',
+                  'Hello! Register to',
                   style: GoogleFonts.urbanist(
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
                       color: fontcolor),
                 ),
-                Text("Glad to see you,",
+                Text("get started",
                     style: GoogleFonts.urbanist(
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
                         color: componentcolor)),
-                Text("Again!",
-                    style: GoogleFonts.urbanist(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        color: fontcolor)),
               ],
             ),
           ),
@@ -53,14 +47,19 @@ class RegisterScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(30),
-            child: CustomTextfield(hinttext: "Enter your email"),
+            child: CustomTextfield(hinttext: "Username"),
           ),
           Padding(
-            padding: const EdgeInsets.only(
-              left: 30,
-              right: 30,
-            ),
-            child: CustomTextfield(hinttext: "Enter password"),
+            padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
+            child: CustomTextfield(hinttext: "Email"),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
+            child: CustomTextfield(hinttext: "Password"),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
+            child: CustomTextfield(hinttext: "Confirm password"),
           ),
           const SizedBox(
             height: 10,
@@ -68,20 +67,26 @@ class RegisterScreen extends StatelessWidget {
           CustomButton(
             onPressed: () {},
             size: size,
-            buttonname: "Login",
+            buttonname: "Register",
           ),
-          SizedBox(
-            height: 30,
+          const SizedBox(
+            height: 40,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Don't have an account? ",
+              Text("Already have an account? ",
                   style:
                       GoogleFonts.urbanist(fontSize: 14, color: Colors.white)),
               GestureDetector(
-                onTap: () {},
-                child: Text('Register Now',
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ));
+                },
+                child: Text('Login Now',
                     style:
                         GoogleFonts.urbanist(fontSize: 14, color: extracolor)),
               ),

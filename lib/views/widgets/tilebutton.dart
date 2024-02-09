@@ -18,7 +18,7 @@ class TileButton extends StatelessWidget {
       height: size.height * 0.08,
       width: size.width * 0.26,
       child: ElevatedButton(
-          onPressed: () {},
+          onPressed: onPressed,
           style: ButtonStyle(
               shape: MaterialStatePropertyAll(RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8)))),

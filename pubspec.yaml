@@ -32,6 +32,8 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^6.1.0
+  country_picker: ^2.0.24
+  pinput: ^3.0.1
 
 dev_dependencies:
 
