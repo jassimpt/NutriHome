@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/views/phoneauthscreen.dart';
 import 'package:nutrihome/views/registerscreen.dart';
+import 'package:nutrihome/views/widgets/bottomnav.dart';
 import 'package:nutrihome/views/widgets/custombutton.dart';
 import 'package:nutrihome/views/widgets/customdivider.dart';
 import 'package:nutrihome/views/widgets/customtextfield.dart';
@@ -81,7 +82,11 @@ class LoginScreen extends StatelessWidget {
             height: 10,
           ),
           CustomButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const BottomNav(),
+              ));
+            },
             size: size,
             buttonname: "Login",
           ),
@@ -115,7 +120,7 @@ class LoginScreen extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Row(
