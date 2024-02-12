@@ -5,6 +5,7 @@ import 'package:nutrihome/helpers/basics.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/model/categoriesmode.dart';
 import 'package:nutrihome/model/productsmodel.dart';
+import 'package:nutrihome/views/profilescreen.dart';
 import 'package:nutrihome/views/widgets/customdrawerbutton.dart';
 import 'package:nutrihome/views/widgets/postercarousal.dart';
 import 'package:nutrihome/views/widgets/productsgrid.dart';
@@ -37,7 +38,13 @@ class Homescreen extends StatelessWidget {
                     ),
                     CustomDrawerButton(
                       size: size,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProfileScreen(),
+                            ));
+                      },
                       child: Text(
                         'A',
                         style: GoogleFonts.bangers(

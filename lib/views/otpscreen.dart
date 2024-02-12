@@ -20,7 +20,17 @@ class OtpScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SafeArea(
-              child: CustomBackButton(size: size),
+              child: CustomBackButton(
+                  bottom: 30,
+                  left: 30,
+                  right: 30,
+                  top: 30,
+                  size: size,
+                  color: extrabgcolor,
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  )),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 30, right: 30),
