@@ -5,3 +5,4 @@ const fontcolor = Colors.white;
 const componentcolor = Color.fromRGBO(151, 117, 250, 1);
 const extracolor = Color.fromRGBO(53, 194, 193, 1);
 const extrabgcolor = Color.fromRGBO(41, 54, 61, 1);
+const productbgcolor = Color.fromRGBO(34, 46, 52, 1);

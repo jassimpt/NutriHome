@@ -97,9 +97,6 @@ class OtpScreen extends StatelessWidget {
               size: size,
               buttonname: "Send code",
             ),
-            // Padding(
-            //     padding: EdgeInsets.only(
-            //         bottom: MediaQuery.of(context).viewInsets.bottom))
           ],
         ),
       ),
