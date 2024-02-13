@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/phoneauthscreen.dart';
-import 'package:nutrihome/views/registerscreen.dart';
+import 'package:nutrihome/views/login/phoneauthscreen.dart';
+import 'package:nutrihome/views/register/registerscreen.dart';
 import 'package:nutrihome/views/widgets/bottomnav.dart';
 import 'package:nutrihome/views/widgets/custombutton.dart';
-import 'package:nutrihome/views/widgets/customdivider.dart';
+import 'package:nutrihome/views/login/widgets/customdivider.dart';
 import 'package:nutrihome/views/widgets/customtextfield.dart';
-import 'package:nutrihome/views/widgets/tilebutton.dart';
+import 'package:nutrihome/views/login/widgets/tilebutton.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});

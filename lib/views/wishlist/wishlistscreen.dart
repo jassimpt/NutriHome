@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/widgets/wishlistitems.dart';
+import 'package:nutrihome/views/wishlist/widgets/wishlistitems.dart';
 
 class WishListScreen extends StatelessWidget {
   const WishListScreen({super.key});

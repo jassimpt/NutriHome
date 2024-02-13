@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/basics.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/model/productsmodel.dart';
-import 'package:nutrihome/views/detailsscreen.dart';
+import 'package:nutrihome/views/details/detailsscreen.dart';
 
 class ProductsGrid extends StatelessWidget {
   const ProductsGrid({
@@ -52,7 +52,10 @@ class ProductsGrid extends StatelessWidget {
                             color: extrabgcolor,
                             borderRadius:
                                 BorderRadius.all(Radius.circular(10))),
-                        child: Image.asset(products.image!),
+                        child: Hero(
+                          tag: products.name!,
+                          child: Image.asset(products.image!),
+                        ),
                       ),
                     ),
                     Expanded(

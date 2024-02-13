@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
+
+import 'package:nutrihome/views/profile/addressscreen.dart';
+import 'package:nutrihome/views/profile/ordersscreen.dart';
 import 'package:nutrihome/views/widgets/custombackbutton.dart';
-import 'package:nutrihome/views/widgets/profilerow.dart';
+import 'package:nutrihome/views/profile/widgets/profilerow.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -29,7 +32,10 @@ class ProfileScreen extends StatelessWidget {
                     top: 10,
                     size: size,
                     color: extrabgcolor,
-                    child: const Icon(Icons.arrow_back),
+                    child: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    ),
                   ),
                   Text(
                     'My ',
@@ -123,7 +129,13 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ),
                         ProfileRow(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => OrdersScreen(),
+                                  ));
+                            },
                             size: size,
                             text: "My Orders",
                             child: const Icon(
@@ -131,7 +143,13 @@ class ProfileScreen extends StatelessWidget {
                               color: Colors.white,
                             )),
                         ProfileRow(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AddressListScreen(),
+                                ));
+                          },
                           size: size,
                           text: "Shipping address",
                           child: const Icon(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/loginscreen.dart';
+import 'package:nutrihome/views/login/loginscreen.dart';
 import 'package:nutrihome/views/widgets/custombutton.dart';
 import 'package:nutrihome/views/widgets/customtextfield.dart';
 

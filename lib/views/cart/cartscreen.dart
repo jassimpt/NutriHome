@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/basics.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/widgets/cartitems.dart';
+import 'package:nutrihome/views/cart/widgets/cartitems.dart';
 import 'package:nutrihome/views/widgets/customlongbutton.dart';
 
 class CartScreen extends StatelessWidget {
@@ -72,6 +72,7 @@ class CartScreen extends StatelessWidget {
               CustomLongButton(
                 size: size,
                 onTap: () {},
+                buttonname: "Proceed to checkout",
               )
             ],
           ),

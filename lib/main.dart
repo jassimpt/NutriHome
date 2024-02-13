@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nutrihome/views/loginscreen.dart';
+import 'package:nutrihome/views/login/loginscreen.dart';
 
 void main(List<String> args) {
   runApp(const Myapp());

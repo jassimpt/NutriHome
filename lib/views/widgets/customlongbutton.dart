@@ -3,16 +3,23 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
 
 class CustomLongButton extends StatelessWidget {
-  const CustomLongButton({super.key, required this.size, required this.onTap});
+  const CustomLongButton(
+      {super.key,
+      required this.size,
+      required this.onTap,
+      required this.buttonname});
 
   final Size size;
   final void Function()? onTap;
+  final String buttonname;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(15),
-      child: GestureDetector(
+      child: InkWell(
+        enableFeedback: true,
+        borderRadius: BorderRadius.circular(15),
         onTap: onTap,
         child: Container(
           width: size.width,
@@ -25,7 +32,7 @@ class CustomLongButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Proceed to checkout',
+                  buttonname,
                   style: GoogleFonts.poppins(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,

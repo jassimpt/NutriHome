@@ -5,9 +5,9 @@ import 'package:nutrihome/helpers/basics.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/model/categoriesmode.dart';
 import 'package:nutrihome/model/productsmodel.dart';
-import 'package:nutrihome/views/profilescreen.dart';
-import 'package:nutrihome/views/widgets/customdrawerbutton.dart';
-import 'package:nutrihome/views/widgets/postercarousal.dart';
+import 'package:nutrihome/views/profile/profilescreen.dart';
+import 'package:nutrihome/views/home/widgets/customdrawerbutton.dart';
+import 'package:nutrihome/views/home/widgets/postercarousal.dart';
 import 'package:nutrihome/views/widgets/productsgrid.dart';
 
 class Homescreen extends StatelessWidget {

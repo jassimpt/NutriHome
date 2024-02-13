@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/cartscreen.dart';
-import 'package:nutrihome/views/homescree.dart';
-import 'package:nutrihome/views/searchscreen.dart';
-import 'package:nutrihome/views/wishlistscreen.dart';
+import 'package:nutrihome/views/cart/cartscreen.dart';
+import 'package:nutrihome/views/home/homescree.dart';
+import 'package:nutrihome/views/search/searchscreen.dart';
+import 'package:nutrihome/views/wishlist/wishlistscreen.dart';
 
 class BottomNav extends StatefulWidget {
   const BottomNav({super.key});

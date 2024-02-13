@@ -73,13 +73,16 @@ class WishlistItems extends StatelessWidget {
                               height: size.height * 0.04,
                               width: size.width * 0.3,
                               child: ElevatedButton(
+                                style: const ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(
+                                        componentcolor)),
                                 onPressed: () {},
                                 child: Text(
                                   "Add to cart",
                                   style: GoogleFonts.poppins(
                                       fontSize: 10,
                                       fontWeight: FontWeight.bold,
-                                      color: componentcolor),
+                                      color: fontcolor),
                                 ),
                               ),
                             ),
