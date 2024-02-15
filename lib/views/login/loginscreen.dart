@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nutrihome/controller/authprovider.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/views/login/phoneauthscreen.dart';
 import 'package:nutrihome/views/register/registerscreen.dart';
@@ -8,13 +9,18 @@ import 'package:nutrihome/views/widgets/custombutton.dart';
 import 'package:nutrihome/views/login/widgets/customdivider.dart';
 import 'package:nutrihome/views/widgets/customtextfield.dart';
 import 'package:nutrihome/views/login/widgets/tilebutton.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
+
+  final TextEditingController emailcontroller = TextEditingController();
+  final TextEditingController passcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: backgroundcolor,
@@ -56,14 +62,16 @@ class LoginScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(30),
-            child: CustomTextfield(hinttext: "Enter your email"),
+            child: CustomTextfield(
+                hinttext: "Enter your email", controller: emailcontroller),
           ),
           Padding(
             padding: const EdgeInsets.only(
               left: 30,
               right: 30,
             ),
-            child: CustomTextfield(hinttext: "Enter password"),
+            child: CustomTextfield(
+                hinttext: "Enter password", controller: passcontroller),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 30, right: 30, top: 10),
@@ -83,9 +91,8 @@ class LoginScreen extends StatelessWidget {
           ),
           CustomButton(
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const BottomNav(),
-              ));
+              Provider.of<AuthProvider>(context, listen: false)
+                  .signInWithEmail(emailcontroller.text, passcontroller.text);
             },
             size: size,
             buttonname: "Login",
@@ -113,7 +120,7 @@ class LoginScreen extends StatelessWidget {
                   image: 'assets/icons/iphone 1.png',
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const PhoneAuthScreen(),
+                      builder: (context) => PhoneAuthScreen(),
                     ));
                   },
                 ),
@@ -134,7 +141,7 @@ class LoginScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const RegisterScreen(),
+                        builder: (context) => RegisterScreen(),
                       ));
                 },
                 child: Text('Register Now',

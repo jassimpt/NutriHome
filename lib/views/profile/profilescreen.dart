@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:nutrihome/controller/authprovider.dart';
 import 'package:nutrihome/helpers/colors.dart';
 
 import 'package:nutrihome/views/profile/addressscreen.dart';
 import 'package:nutrihome/views/profile/ordersscreen.dart';
 import 'package:nutrihome/views/widgets/custombackbutton.dart';
 import 'package:nutrihome/views/profile/widgets/profilerow.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -166,7 +169,7 @@ class ProfileScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
                 child: Container(
                   width: size.width,
-                  height: size.height * 0.26,
+                  height: size.height * 0.32,
                   decoration: BoxDecoration(
                       color: productbgcolor,
                       borderRadius: BorderRadius.circular(15)),
@@ -196,7 +199,18 @@ class ProfileScreen extends StatelessWidget {
                             Icons.contact_emergency,
                             color: Colors.white,
                           ),
-                        )
+                        ),
+                        ProfileRow(
+                            size: size,
+                            text: "Logout",
+                            onTap: () {
+                              Provider.of<AuthProvider>(context, listen: false)
+                                  .signOut();
+                            },
+                            child: const Icon(
+                              Iconsax.logout,
+                              color: Colors.white,
+                            ))
                       ],
                     ),
                   ),

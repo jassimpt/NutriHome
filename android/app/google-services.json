@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "879624233055",
+    "project_id": "nutrihome-aa612",
+    "storage_bucket": "nutrihome-aa612.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879624233055:android:2a4b5de37a459e0e863bea",
+        "android_client_info": {
+          "package_name": "com.example.nutrihome"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApke8hR-Fpf3lbQB6HxK2IAiKSkPMJoX4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

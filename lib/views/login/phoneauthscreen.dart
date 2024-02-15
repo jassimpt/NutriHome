@@ -8,7 +8,10 @@ import 'package:nutrihome/views/login/widgets/customphonefield.dart';
 import 'package:nutrihome/views/widgets/customtextfield.dart';
 
 class PhoneAuthScreen extends StatelessWidget {
-  const PhoneAuthScreen({super.key});
+  PhoneAuthScreen({super.key});
+
+  final TextEditingController namecontroller = TextEditingController();
+  final TextEditingController emailcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -72,11 +75,13 @@ class PhoneAuthScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
-              child: CustomTextfield(hinttext: "enter your name"),
+              child: CustomTextfield(
+                  hinttext: "enter your name", controller: namecontroller),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
-              child: CustomTextfield(hinttext: "enter your email"),
+              child: CustomTextfield(
+                  hinttext: "enter your email", controller: emailcontroller),
             ),
             const SizedBox(
               height: 10,

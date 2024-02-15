@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nutrihome/controller/authprovider.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/views/login/loginscreen.dart';
 import 'package:nutrihome/views/widgets/custombutton.dart';
 import 'package:nutrihome/views/widgets/customtextfield.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+  RegisterScreen({super.key});
+
+  final TextEditingController usernamecontroller = TextEditingController();
+  final TextEditingController emailcontroller = TextEditingController();
+  final TextEditingController passwordcontroller = TextEditingController();
+  final TextEditingController confirmpasswordcontroller =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,25 +55,33 @@ class RegisterScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(30),
-            child: CustomTextfield(hinttext: "Username"),
+            child: CustomTextfield(
+                hinttext: "Username", controller: usernamecontroller),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
-            child: CustomTextfield(hinttext: "Email"),
+            child:
+                CustomTextfield(hinttext: "Email", controller: emailcontroller),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
-            child: CustomTextfield(hinttext: "Password"),
+            child: CustomTextfield(
+                hinttext: "Password", controller: passwordcontroller),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
-            child: CustomTextfield(hinttext: "Confirm password"),
+            child: CustomTextfield(
+              hinttext: "Confirm password",
+              controller: confirmpasswordcontroller,
+            ),
           ),
           const SizedBox(
             height: 10,
           ),
           CustomButton(
-            onPressed: () {},
+            onPressed: () {
+              signUpWithEmail(context);
+            },
             size: size,
             buttonname: "Register",
           ),
@@ -83,7 +99,7 @@ class RegisterScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const LoginScreen(),
+                        builder: (context) => LoginScreen(),
                       ));
                 },
                 child: Text('Login Now',
@@ -95,5 +111,17 @@ class RegisterScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  signUpWithEmail(BuildContext context) {
+    if (passwordcontroller.text == confirmpasswordcontroller.text) {
+      Provider.of<AuthProvider>(context, listen: false).signUpWithEmail(
+          emailcontroller.text,
+          passwordcontroller.text,
+          usernamecontroller.text);
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Passwords Not Same')));
+    }
   }
 }
