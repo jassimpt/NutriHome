@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nutrihome/controller/authprovider.dart';
 import 'package:nutrihome/helpers/colors.dart';
+import 'package:nutrihome/views/client/bottomnav/bottomnav.dart';
 import 'package:nutrihome/views/widgets/custombackbutton.dart';
 import 'package:nutrihome/views/widgets/custombutton.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
 
 class OtpScreen extends StatelessWidget {
-  const OtpScreen({super.key});
+  OtpScreen({super.key, required this.verificationid, this.email, this.name});
+
+  final String verificationid;
+  final String? name;
+  final String? email;
+  final TextEditingController otpcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +35,7 @@ class OtpScreen extends StatelessWidget {
                   top: 30,
                   size: size,
                   color: extrabgcolor,
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back,
                     color: Colors.white,
                   )),
@@ -86,11 +94,12 @@ class OtpScreen extends StatelessWidget {
             SizedBox(
               height: size.height * 0.03,
             ),
-            const Center(
+            Center(
               child: Pinput(
+                controller: otpcontroller,
                 length: 6,
                 showCursor: true,
-                defaultPinTheme: PinTheme(
+                defaultPinTheme: const PinTheme(
                     textStyle: TextStyle(fontSize: 18, color: Colors.black),
                     width: 50,
                     height: 60,
@@ -103,13 +112,26 @@ class OtpScreen extends StatelessWidget {
               height: size.height * 0.05,
             ),
             CustomButton(
-              onPressed: () {},
+              onPressed: () {
+                verifyOtp(context);
+              },
               size: size,
-              buttonname: "Send code",
+              buttonname: "Verify otp",
             ),
           ],
         ),
       ),
     );
+  }
+
+  void verifyOtp(BuildContext context) {
+    Provider.of<AuthProvider>(context, listen: false)
+        .verifyOtp(verificationid, otpcontroller.text, () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const BottomNav(),
+          ));
+    }, name!, email!);
   }
 }

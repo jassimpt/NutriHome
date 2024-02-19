@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nutrihome/controller/authprovider.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/views/login/otpscreen.dart';
 import 'package:nutrihome/views/widgets/custombackbutton.dart';
 import 'package:nutrihome/views/widgets/custombutton.dart';
 import 'package:nutrihome/views/login/widgets/customphonefield.dart';
 import 'package:nutrihome/views/widgets/customtextfield.dart';
+import 'package:provider/provider.dart';
 
 class PhoneAuthScreen extends StatelessWidget {
   PhoneAuthScreen({super.key});
 
   final TextEditingController namecontroller = TextEditingController();
   final TextEditingController emailcontroller = TextEditingController();
+  final TextEditingController phonecontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final pro = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: backgroundcolor,
@@ -71,7 +75,7 @@ class PhoneAuthScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(30),
-              child: CustomPhoneField(),
+              child: CustomPhoneField(phonecontroller: phonecontroller),
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(30, 0, 30, 30),
@@ -88,11 +92,10 @@ class PhoneAuthScreen extends StatelessWidget {
             ),
             CustomButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const OtpScreen(),
-                    ));
+                String countrycode = "+91";
+                String phonenumber = countrycode + phonecontroller.text;
+                pro.signInWithPhone(phonenumber, namecontroller.text,
+                    emailcontroller.text, context);
               },
               size: size,
               buttonname: "Send code",

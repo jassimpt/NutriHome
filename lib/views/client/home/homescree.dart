@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/basics.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/model/categoriesmode.dart';
-import 'package:nutrihome/model/productsmodel.dart';
-import 'package:nutrihome/views/profile/profilescreen.dart';
-import 'package:nutrihome/views/home/widgets/customdrawerbutton.dart';
-import 'package:nutrihome/views/home/widgets/postercarousal.dart';
+import 'package:nutrihome/views/client/home/widgets/customdrawerbutton.dart';
+import 'package:nutrihome/views/client/home/widgets/postercarousal.dart';
+import 'package:nutrihome/views/client/profile/profilescreen.dart';
 import 'package:nutrihome/views/widgets/productsgrid.dart';
 
 class Homescreen extends StatelessWidget {

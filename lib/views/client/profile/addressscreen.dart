@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/profile/addressaddscreen.dart';
+import 'package:nutrihome/views/client/profile/addressaddscreen.dart';
 import 'package:nutrihome/views/widgets/custombackbutton.dart';
 import 'package:nutrihome/views/widgets/customlongbutton.dart';
-import 'package:nutrihome/views/profile/widgets/profilerow.dart';
 
 class AddressListScreen extends StatelessWidget {
   const AddressListScreen({super.key});

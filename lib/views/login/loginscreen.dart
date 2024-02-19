@@ -3,8 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/controller/authprovider.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/views/login/phoneauthscreen.dart';
-import 'package:nutrihome/views/register/registerscreen.dart';
-import 'package:nutrihome/views/widgets/bottomnav.dart';
+import 'package:nutrihome/views/client/register/registerscreen.dart';
 import 'package:nutrihome/views/widgets/custombutton.dart';
 import 'package:nutrihome/views/login/widgets/customdivider.dart';
 import 'package:nutrihome/views/widgets/customtextfield.dart';
@@ -20,7 +19,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    final pro = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: backgroundcolor,
@@ -91,8 +90,7 @@ class LoginScreen extends StatelessWidget {
           ),
           CustomButton(
             onPressed: () {
-              Provider.of<AuthProvider>(context, listen: false)
-                  .signInWithEmail(emailcontroller.text, passcontroller.text);
+              pro.signInWithEmail(emailcontroller.text, passcontroller.text);
             },
             size: size,
             buttonname: "Login",
@@ -113,7 +111,9 @@ class LoginScreen extends StatelessWidget {
                 TileButton(
                   size: size,
                   image: 'assets/icons/google_ic.png',
-                  onPressed: () {},
+                  onPressed: () {
+                    pro.signInWithGoogle();
+                  },
                 ),
                 TileButton(
                   size: size,

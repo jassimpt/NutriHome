@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/basics.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/model/productsmodel.dart';
-import 'package:nutrihome/views/details/detailsscreen.dart';
+import 'package:nutrihome/views/client/details/detailsscreen.dart';
 
 class ProductsGrid extends StatelessWidget {
   const ProductsGrid({

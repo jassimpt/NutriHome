@@ -2,7 +2,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
 class CustomPhoneField extends StatelessWidget {
-  CustomPhoneField({super.key});
+  CustomPhoneField({super.key, required this.phonecontroller});
 
   final Country selectedcountry = Country(
       phoneCode: "+91",
@@ -16,9 +16,12 @@ class CustomPhoneField extends StatelessWidget {
       displayNameNoCountryCode: "IN",
       e164Key: "");
 
+  final TextEditingController phonecontroller;
+
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: phonecontroller,
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
           hintText: "enter your phone number",

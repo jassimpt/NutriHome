@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/profile/widgets/addressfield.dart';
+import 'package:nutrihome/views/client/profile/widgets/addressfield.dart';
 import 'package:nutrihome/views/widgets/custombackbutton.dart';
 
 class AddressAddScreen extends StatelessWidget {

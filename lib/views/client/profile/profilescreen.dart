@@ -3,11 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nutrihome/controller/authprovider.dart';
 import 'package:nutrihome/helpers/colors.dart';
-
-import 'package:nutrihome/views/profile/addressscreen.dart';
-import 'package:nutrihome/views/profile/ordersscreen.dart';
+import 'package:nutrihome/views/client/profile/addressscreen.dart';
+import 'package:nutrihome/views/client/profile/ordersscreen.dart';
+import 'package:nutrihome/views/client/profile/widgets/profilerow.dart';
 import 'package:nutrihome/views/widgets/custombackbutton.dart';
-import 'package:nutrihome/views/profile/widgets/profilerow.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {

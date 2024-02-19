@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/wishlist/widgets/wishlistitems.dart';
+import 'package:nutrihome/views/client/profile/widgets/orderslist.dart';
+import 'package:nutrihome/views/widgets/custombackbutton.dart';
 
-class WishListScreen extends StatelessWidget {
-  const WishListScreen({super.key});
+class OrdersScreen extends StatelessWidget {
+  const OrdersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,30 +21,43 @@ class WishListScreen extends StatelessWidget {
                 height: 20,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  CustomBackButton(
+                      size: size,
+                      color: extrabgcolor,
+                      bottom: 0,
+                      left: 30,
+                      right: 30,
+                      top: 0,
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                      )),
+                  SizedBox(
+                    width: size.width * 0.08,
+                  ),
                   Text(
                     'My ',
                     style: GoogleFonts.poppins(
-                        fontSize: 30,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                         color: fontcolor),
                   ),
                   Text(
-                    "Wishlist",
+                    "Orders",
                     style: GoogleFonts.poppins(
-                        fontSize: 30,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                         color: componentcolor),
                   ),
                 ],
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 15, right: 15),
-                child: WishlistItems(),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: OrdersList(size: size),
               ),
             ],
           ),

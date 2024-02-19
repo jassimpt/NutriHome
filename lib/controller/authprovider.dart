@@ -14,6 +14,33 @@ class AuthProvider extends ChangeNotifier {
     return service.signUpWithEmail(email, password, name);
   }
 
+  Future<UserCredential> signInWithGoogle() {
+    return service.signInWithGoogle();
+  }
+
+  signInWithPhone(
+      String phonenumber, String name, String email, BuildContext context) {
+    try {
+      service.signInWithPhone(phonenumber, name, email, context);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  verifyOtp(String verificationid, String otp, Function onSuccess, String name,
+      String email) {
+    try {
+      service.verifyOtp(
+          verificationid: verificationid,
+          otp: otp,
+          onSuccess: onSuccess,
+          email: email,
+          name: name);
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   signOut() {
     return service.signOut();
   }

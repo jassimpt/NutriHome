@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/model/productsmodel.dart';
+import 'package:nutrihome/views/client/details/widgets/detailsrow.dart';
 import 'package:nutrihome/views/widgets/custombackbutton.dart';
-import 'package:nutrihome/views/details/widgets/detailsrow.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({super.key, required this.product});
