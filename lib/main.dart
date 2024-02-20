@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:nutrihome/controller/authprovider.dart';
+import 'package:nutrihome/controller/firestoreprovider.dart';
 import 'package:nutrihome/firebase_options.dart';
 import 'package:nutrihome/views/login/authgate.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,9 @@ class Myapp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => AuthProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FirestoreProvider(),
         )
       ],
       child: const MaterialApp(

@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:nutrihome/controller/firestoreprovider.dart';
 import 'package:nutrihome/helpers/basics.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/model/categoriesmode.dart';
+import 'package:nutrihome/views/Admin/home/productaddscreen.dart';
 import 'package:nutrihome/views/client/home/widgets/postercarousal.dart';
 import 'package:nutrihome/views/widgets/productsgrid.dart';
+import 'package:provider/provider.dart';
 
-class AdminHome extends StatelessWidget {
+class AdminHome extends StatefulWidget {
   const AdminHome({Key? key});
+
+  @override
+  State<AdminHome> createState() => _AdminHomeState();
+}
+
+class _AdminHomeState extends State<AdminHome> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<FirestoreProvider>(context, listen: false).fetchAllProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,18 +100,27 @@ class AdminHome extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Container(
-                      width: size.width * 0.15,
-                      height: size.height * 0.07,
-                      decoration: BoxDecoration(
-                          color: componentcolor,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: const Center(
-                          child: Icon(
-                        Icons.add,
-                        color: fontcolor,
-                        size: 30,
-                      )),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProductAddScreen(),
+                            ));
+                      },
+                      child: Container(
+                        width: size.width * 0.15,
+                        height: size.height * 0.07,
+                        decoration: BoxDecoration(
+                            color: componentcolor,
+                            borderRadius: BorderRadius.circular(10)),
+                        child: const Center(
+                            child: Icon(
+                          Icons.add,
+                          color: fontcolor,
+                          size: 30,
+                        )),
+                      ),
                     )
                   ],
                 ),

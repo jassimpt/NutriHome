@@ -39,7 +39,7 @@ class OrdersList extends StatelessWidget {
                         color: extrabgcolor,
                         borderRadius: BorderRadius.circular(15)),
                     child: Image.asset(
-                      product.image!,
+                      product.imageurl!,
                     ),
                   ),
                 ),

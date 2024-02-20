@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nutrihome/controller/firestoreprovider.dart';
 import 'package:nutrihome/helpers/colors.dart';
+import 'package:nutrihome/model/productsmodel.dart';
 import 'package:nutrihome/views/client/profile/widgets/addressfield.dart';
 import 'package:nutrihome/views/widgets/custombackbutton.dart';
+import 'package:provider/provider.dart';
 
-class AddressAddScreen extends StatelessWidget {
-  AddressAddScreen({super.key});
+class ProductAddScreen extends StatelessWidget {
+  ProductAddScreen({super.key});
 
   TextEditingController namecontroller = TextEditingController();
-  TextEditingController countrycontroller = TextEditingController();
-  TextEditingController citycontroller = TextEditingController();
-  TextEditingController phonecontroller = TextEditingController();
-  TextEditingController landmarkcontroller = TextEditingController();
-  TextEditingController addresscontroller = TextEditingController();
-
+  TextEditingController pricecontroller = TextEditingController();
+  TextEditingController weightcontroller = TextEditingController();
+  TextEditingController totalservingscontroller = TextEditingController();
+  TextEditingController servingscontroller = TextEditingController();
+  TextEditingController imagecontroller = TextEditingController();
+  TextEditingController flavourcontroller = TextEditingController();
+  TextEditingController categorycontroller = TextEditingController();
+  TextEditingController howtousecontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -46,7 +51,7 @@ class AddressAddScreen extends StatelessWidget {
                     width: size.width * 0.1,
                   ),
                   Text(
-                    'Address',
+                    'Add Product',
                     style: GoogleFonts.urbanist(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
@@ -67,42 +72,66 @@ class AddressAddScreen extends StatelessWidget {
                     Row(
                       children: [
                         AddressFields(
-                          controller: countrycontroller,
+                          controller: pricecontroller,
                           maxlines: 1,
-                          text: "Country",
+                          text: "Price",
                           width: size.width * 0.43,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         AddressFields(
-                          controller: citycontroller,
+                          controller: weightcontroller,
                           maxlines: 1,
-                          text: "City",
+                          text: "Weight",
+                          width: size.width * 0.43,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        AddressFields(
+                          controller: totalservingscontroller,
+                          maxlines: 1,
+                          text: "Total servings",
+                          width: size.width * 0.43,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        AddressFields(
+                          controller: servingscontroller,
+                          maxlines: 1,
+                          text: "serving size",
                           width: size.width * 0.43,
                         ),
                       ],
                     ),
                     AddressFields(
-                      controller: phonecontroller,
-                      text: "Phone Number",
-                      width: size.width,
+                        controller: imagecontroller,
+                        text: "Image url",
+                        width: size.width,
+                        maxlines: 1),
+                    AddressFields(
                       maxlines: 1,
+                      controller: flavourcontroller,
+                      text: "Flavour",
+                      width: size.width,
                     ),
                     AddressFields(
-                      controller: addresscontroller,
+                      controller: categorycontroller,
                       maxlines: 1,
-                      text: "Address",
+                      text: "Category",
                       width: size.width,
                     ),
                     AddressFields(
-                      controller: landmarkcontroller,
-                      maxlines: 1,
-                      text: "Landmark",
+                      controller: howtousecontroller,
+                      maxlines: 5,
+                      text: "How to use",
                       width: size.width,
                     ),
                     SizedBox(
-                      height: size.height * 0.1,
+                      height: size.height * 0.05,
                     ),
                     SizedBox(
                       height: size.height * 0.06,
@@ -114,9 +143,11 @@ class AddressAddScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(15))),
                             backgroundColor:
                                 const MaterialStatePropertyAll(componentcolor)),
-                        onPressed: () {},
+                        onPressed: () {
+                          addProduct(context);
+                        },
                         child: Text(
-                          "Save Address",
+                          "Add Product",
                           style: GoogleFonts.urbanist(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -132,5 +163,21 @@ class AddressAddScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  addProduct(BuildContext context) {
+    final pro = Provider.of<FirestoreProvider>(context, listen: false);
+    ProductsModel product = ProductsModel(
+        category: categorycontroller.text,
+        flavour: flavourcontroller.text,
+        howtouse: howtousecontroller.text,
+        imageurl: imagecontroller.text,
+        name: namecontroller.text,
+        price: int.parse(pricecontroller.text),
+        serving: servingscontroller.text,
+        totalservings: double.parse(totalservingscontroller.text),
+        weight: weightcontroller.text);
+    pro.addProduct(product: product, category: categorycontroller.text);
+    Navigator.pop(context);
   }
 }

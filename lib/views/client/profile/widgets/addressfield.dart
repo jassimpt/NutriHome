@@ -3,10 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
 
 class AddressFields extends StatelessWidget {
-  const AddressFields({super.key, required this.text, required this.width});
+  const AddressFields(
+      {super.key,
+      required this.text,
+      required this.width,
+      required this.controller,
+      required this.maxlines});
   final String text;
   final double? width;
-
+  final int? maxlines;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,6 +29,8 @@ class AddressFields extends StatelessWidget {
         SizedBox(
           width: width,
           child: TextFormField(
+            controller: controller,
+            maxLines: maxlines,
             decoration: InputDecoration(
                 filled: true,
                 fillColor: extrabgcolor,

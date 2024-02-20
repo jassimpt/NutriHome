@@ -49,7 +49,7 @@ class DetailsScreen extends StatelessWidget {
               child: Hero(
                 tag: product.name!,
                 child: Image.asset(
-                  product.image!,
+                  product.imageurl!,
                   height: size.height * 0.25,
                 ),
               ),
