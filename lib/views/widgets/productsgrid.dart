@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/controller/firestoreprovider.dart';
-import 'package:nutrihome/helpers/basics.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/model/productsmodel.dart';
 import 'package:nutrihome/views/client/details/detailsscreen.dart';
@@ -31,11 +30,11 @@ class ProductsGrid extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
                 onTap: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //       builder: (context) => DetailsScreen(product: products),
-                  //     ));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailsScreen(product: products),
+                      ));
                 },
                 child: Container(
                   width: size.width / 2,

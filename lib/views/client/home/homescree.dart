@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nutrihome/controller/firestoreprovider.dart';
 import 'package:nutrihome/helpers/basics.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/model/categoriesmode.dart';
@@ -7,9 +8,21 @@ import 'package:nutrihome/views/client/home/widgets/customdrawerbutton.dart';
 import 'package:nutrihome/views/client/home/widgets/postercarousal.dart';
 import 'package:nutrihome/views/client/profile/profilescreen.dart';
 import 'package:nutrihome/views/widgets/productsgrid.dart';
+import 'package:provider/provider.dart';
 
-class Homescreen extends StatelessWidget {
+class Homescreen extends StatefulWidget {
   const Homescreen({Key? key});
+
+  @override
+  State<Homescreen> createState() => _HomescreenState();
+}
+
+class _HomescreenState extends State<Homescreen> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<FirestoreProvider>(context, listen: false).fetchAllProducts();
+  }
 
   @override
   Widget build(BuildContext context) {

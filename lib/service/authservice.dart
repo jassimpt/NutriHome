@@ -27,7 +27,10 @@ class AuthService {
           .createUserWithEmailAndPassword(email: email, password: password);
       UserModel user =
           UserModel(email: email, username: name, uid: userinfo.user!.uid);
-      await firestore.collection('users').doc(name).set(user.toJson());
+      await firestore
+          .collection('users')
+          .doc(userinfo.user!.uid)
+          .set(user.toJson());
       return userinfo;
     } on FirebaseAuthException catch (e) {
       throw Exception(e);
@@ -49,7 +52,7 @@ class AuthService {
           uid: googleuser.uid);
       await firestore
           .collection('users')
-          .doc(googleuser.displayName)
+          .doc(googleuser.uid)
           .set(userdata.toJson());
       return userCredential;
     } on FirebaseAuthException catch (e) {
@@ -102,7 +105,7 @@ class AuthService {
       if (user != null) {
         final UserModel userdata =
             UserModel(email: email, username: name, uid: user.uid);
-        firestore.collection('users').doc(name).set(userdata.toJson());
+        firestore.collection('users').doc(user.uid).set(userdata.toJson());
         onSuccess();
       }
     } catch (e) {

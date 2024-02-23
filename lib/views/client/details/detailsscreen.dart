@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nutrihome/controller/firestoreprovider.dart';
 import 'package:nutrihome/helpers/colors.dart';
+import 'package:nutrihome/model/cartitemmodel.dart';
 import 'package:nutrihome/model/productsmodel.dart';
 import 'package:nutrihome/views/client/details/widgets/detailsrow.dart';
 import 'package:nutrihome/views/widgets/custombackbutton.dart';
+import 'package:provider/provider.dart';
 
 class DetailsScreen extends StatelessWidget {
   const DetailsScreen({super.key, required this.product});
@@ -47,12 +50,11 @@ class DetailsScreen extends StatelessWidget {
             ),
             Center(
               child: Hero(
-                tag: product.name!,
-                child: Image.asset(
-                  product.imageurl!,
-                  height: size.height * 0.25,
-                ),
-              ),
+                  tag: product.name!,
+                  child: Image.network(
+                    product.imageurl!,
+                    height: size.height * 0.25,
+                  )),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -60,7 +62,11 @@ class DetailsScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 30, 0),
                   child: GestureDetector(
-                    onTap: () => Navigator.pop(context),
+                    onTap: () {
+                      Provider.of<FirestoreProvider>(context, listen: false)
+                          .addToWishlist(
+                              product: product, productname: product.name!);
+                    },
                     child: Container(
                       width: size.width * 0.1,
                       height: size.height * 0.04,
@@ -188,7 +194,9 @@ class DetailsScreen extends StatelessWidget {
                               style: const ButtonStyle(
                                   backgroundColor:
                                       MaterialStatePropertyAll(componentcolor)),
-                              onPressed: () {},
+                              onPressed: () {
+                                addToCart(context);
+                              },
                               child: Text(
                                 "Add to cart",
                                 style: GoogleFonts.poppins(
@@ -209,5 +217,23 @@ class DetailsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  addToCart(BuildContext context) {
+    final pro = Provider.of<FirestoreProvider>(context, listen: false);
+
+    CartItemModel cartproduct = CartItemModel(
+        category: product.category,
+        flavour: product.flavour,
+        howtouse: product.howtouse,
+        imageurl: product.imageurl,
+        name: product.name,
+        price: product.price,
+        quantity: pro.quantity,
+        serving: product.serving,
+        totalservings: product.totalservings,
+        weight: product.weight);
+
+    pro.addToCart(product: cartproduct, productname: product.name!);
   }
 }
