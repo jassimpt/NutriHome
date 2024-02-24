@@ -67,7 +67,10 @@ class FirestoreProvider extends ChangeNotifier {
             .toList();
         notifyListeners();
       });
-    } catch (e) {}
+      return wishlist;
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
   void incrementQuantity(CartItemModel product) {

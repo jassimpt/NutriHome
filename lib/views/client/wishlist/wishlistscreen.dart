@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nutrihome/controller/firestoreprovider.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/views/client/wishlist/widgets/wishlistitems.dart';
+import 'package:provider/provider.dart';
 
-class WishListScreen extends StatelessWidget {
+class WishListScreen extends StatefulWidget {
   const WishListScreen({super.key});
+
+  @override
+  State<WishListScreen> createState() => _WishListScreenState();
+}
+
+class _WishListScreenState extends State<WishListScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<FirestoreProvider>(context, listen: false).fetchWishListItems();
+  }
 
   @override
   Widget build(BuildContext context) {
