@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/views/client/profile/widgets/addressfield.dart';
-import 'package:nutrihome/views/widgets/custombackbutton.dart';
+import 'package:nutrihome/views/widgets/custom_back_button.dart';
 
 class AddressAddScreen extends StatelessWidget {
   AddressAddScreen({super.key});
 
-  TextEditingController namecontroller = TextEditingController();
-  TextEditingController countrycontroller = TextEditingController();
-  TextEditingController citycontroller = TextEditingController();
-  TextEditingController phonecontroller = TextEditingController();
-  TextEditingController landmarkcontroller = TextEditingController();
-  TextEditingController addresscontroller = TextEditingController();
+  final TextEditingController namecontroller = TextEditingController();
+  final TextEditingController countrycontroller = TextEditingController();
+  final TextEditingController citycontroller = TextEditingController();
+  final TextEditingController phonecontroller = TextEditingController();
+  final TextEditingController landmarkcontroller = TextEditingController();
+  final TextEditingController addresscontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +72,7 @@ class AddressAddScreen extends StatelessWidget {
                           text: "Country",
                           width: size.width * 0.43,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         AddressFields(

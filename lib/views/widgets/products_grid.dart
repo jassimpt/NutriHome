@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nutrihome/controller/firestoreprovider.dart';
+import 'package:nutrihome/controller/firestore_provider.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/model/productsmodel.dart';
-import 'package:nutrihome/views/client/details/detailsscreen.dart';
+import 'package:nutrihome/model/products_model.dart';
+import 'package:nutrihome/views/client/details/details_screen.dart';
 import 'package:provider/provider.dart';
 
 class ProductsGrid extends StatelessWidget {

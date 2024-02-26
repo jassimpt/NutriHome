@@ -1,24 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nutrihome/controller/firestoreprovider.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/client/wishlist/widgets/wishlistitems.dart';
-import 'package:provider/provider.dart';
+import 'package:nutrihome/views/client/profile/widgets/orderslist.dart';
 
-class WishListScreen extends StatefulWidget {
-  const WishListScreen({super.key});
-
-  @override
-  State<WishListScreen> createState() => _WishListScreenState();
-}
-
-class _WishListScreenState extends State<WishListScreen> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Provider.of<FirestoreProvider>(context, listen: false).fetchWishListItems();
-  }
+class OrdersAdmin extends StatelessWidget {
+  const OrdersAdmin({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,27 +23,27 @@ class _WishListScreenState extends State<WishListScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'My ',
+                    'All ',
                     style: GoogleFonts.poppins(
-                        fontSize: 30,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                         color: fontcolor),
                   ),
                   Text(
-                    "Wishlist",
+                    "Orders",
                     style: GoogleFonts.poppins(
-                        fontSize: 30,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                         color: componentcolor),
                   ),
                 ],
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
-              const Padding(
-                padding: EdgeInsets.only(left: 15, right: 15),
-                child: WishlistItems(),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: OrdersList(size: size),
               ),
             ],
           ),

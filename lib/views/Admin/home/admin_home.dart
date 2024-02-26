@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nutrihome/controller/firestoreprovider.dart';
+import 'package:nutrihome/controller/firestore_provider.dart';
 import 'package:nutrihome/helpers/basics.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/model/categoriesmode.dart';
-import 'package:nutrihome/views/Admin/home/productaddscreen.dart';
-import 'package:nutrihome/views/widgets/productsgrid.dart';
+import 'package:nutrihome/model/categories_model.dart';
+import 'package:nutrihome/views/Admin/home/product_add_screen.dart';
+import 'package:nutrihome/views/widgets/products_grid.dart';
 import 'package:provider/provider.dart';
 
 class AdminHome extends StatefulWidget {

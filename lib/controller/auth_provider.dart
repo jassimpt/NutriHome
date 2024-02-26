@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nutrihome/service/authservice.dart';
+import 'package:nutrihome/service/auth_service.dart';
 
 class AuthProvider extends ChangeNotifier {
   AuthService service = AuthService();

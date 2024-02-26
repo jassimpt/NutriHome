@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nutrihome/controller/authprovider.dart';
+import 'package:nutrihome/controller/auth_provider.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/views/login/phoneauthscreen.dart';
-import 'package:nutrihome/views/client/register/registerscreen.dart';
-import 'package:nutrihome/views/widgets/custombutton.dart';
+import 'package:nutrihome/views/client/register/register_screen.dart';
+import 'package:nutrihome/views/widgets/custom_button.dart';
 import 'package:nutrihome/views/login/widgets/customdivider.dart';
-import 'package:nutrihome/views/widgets/customtextfield.dart';
+import 'package:nutrihome/views/widgets/custom_textfield.dart';
 import 'package:nutrihome/views/login/widgets/tilebutton.dart';
 import 'package:provider/provider.dart';
 

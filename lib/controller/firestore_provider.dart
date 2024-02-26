@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nutrihome/model/cartitemmodel.dart';
-import 'package:nutrihome/model/productsmodel.dart';
-import 'package:nutrihome/service/firestoreservice.dart';
+import 'package:nutrihome/model/cart_item_model.dart';
+import 'package:nutrihome/model/products_model.dart';
+import 'package:nutrihome/service/firestore_service.dart';
 
 class FirestoreProvider extends ChangeNotifier {
   FirestoreService service = FirestoreService();

@@ -1,5 +1,5 @@
-import 'package:nutrihome/model/categoriesmode.dart';
-import 'package:nutrihome/model/productsmodel.dart';
+import 'package:nutrihome/model/categories_model.dart';
+import 'package:nutrihome/model/products_model.dart';
 
 List posterimages = [
   "assets/images/Cellucor C4 Pre Workout.jpg",

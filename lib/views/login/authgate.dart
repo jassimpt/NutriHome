@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:nutrihome/views/Admin/bottomnav/bottomnavadmin.dart';
+import 'package:nutrihome/views/Admin/bottom_nav/bottom_nav_admin.dart';
 import 'package:nutrihome/views/login/loginscreen.dart';
-import 'package:nutrihome/views/client/bottomnav/bottomnav.dart';
+import 'package:nutrihome/views/client/bottom_nav/bottom_nav.dart';
 
 class AuthGate extends StatelessWidget {
   const AuthGate({super.key});

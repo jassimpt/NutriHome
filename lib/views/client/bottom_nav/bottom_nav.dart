@@ -2,22 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/Admin/allusers/allusers.dart';
-import 'package:nutrihome/views/Admin/home/adminhome.dart';
-import 'package:nutrihome/views/Admin/orders/ordersadmin.dart';
-import 'package:nutrihome/views/client/cart/cartscreen.dart';
-import 'package:nutrihome/views/client/home/homescree.dart';
-import 'package:nutrihome/views/client/search/searchscreen.dart';
-import 'package:nutrihome/views/client/wishlist/wishlistscreen.dart';
+import 'package:nutrihome/views/client/cart/cart_screen.dart';
+import 'package:nutrihome/views/client/home/home_screen.dart';
+import 'package:nutrihome/views/client/search/search_screen.dart';
+import 'package:nutrihome/views/client/wishlist/wishlist_screen.dart';
 
-class BottomNavAdmin extends StatefulWidget {
-  const BottomNavAdmin({super.key});
+class BottomNav extends StatefulWidget {
+  const BottomNav({super.key});
 
   @override
-  State<BottomNavAdmin> createState() => _BottomNavAdminState();
+  State<BottomNav> createState() => _BottomNavState();
 }
 
-class _BottomNavAdminState extends State<BottomNavAdmin> {
+class _BottomNavState extends State<BottomNav> {
   int selectedindex = 0;
   void pageChanger(int index) {
     setState(() {
@@ -26,10 +23,10 @@ class _BottomNavAdminState extends State<BottomNavAdmin> {
   }
 
   List pages = [
-    const AdminHome(),
-    const OrdersAdmin(),
-    const AllUsers(),
-    // const WishListScreen()
+    const Homescreen(),
+    const SearchScreen(),
+    const CartScreen(),
+    const WishListScreen()
   ];
 
   @override
@@ -49,12 +46,16 @@ class _BottomNavAdminState extends State<BottomNavAdmin> {
             text: 'Home',
           ),
           GButton(
-            icon: Iconsax.shopping_bag,
-            text: "Orders",
+            icon: Iconsax.search_favorite,
+            text: "Search",
           ),
           GButton(
-            icon: Iconsax.user,
-            text: "Users",
+            icon: Iconsax.shopping_bag,
+            text: "Cart",
+          ),
+          GButton(
+            icon: Iconsax.heart4,
+            text: "Wishlist",
           ),
         ],
       ),

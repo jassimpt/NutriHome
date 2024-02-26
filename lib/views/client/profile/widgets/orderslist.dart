@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/basics.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/model/productsmodel.dart';
+import 'package:nutrihome/model/products_model.dart';
 
 class OrdersList extends StatelessWidget {
   const OrdersList({

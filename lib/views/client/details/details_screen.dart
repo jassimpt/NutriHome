@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nutrihome/controller/firestoreprovider.dart';
+import 'package:nutrihome/controller/firestore_provider.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/model/cartitemmodel.dart';
-import 'package:nutrihome/model/productsmodel.dart';
-import 'package:nutrihome/views/client/details/widgets/detailsrow.dart';
-import 'package:nutrihome/views/widgets/custombackbutton.dart';
+import 'package:nutrihome/model/cart_item_model.dart';
+import 'package:nutrihome/model/products_model.dart';
+import 'package:nutrihome/views/client/details/widgets/details_row.dart';
+import 'package:nutrihome/views/widgets/custom_back_button.dart';
 import 'package:provider/provider.dart';
 
 class DetailsScreen extends StatelessWidget {

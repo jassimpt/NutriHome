@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nutrihome/controller/firestoreprovider.dart';
-import 'package:nutrihome/helpers/basics.dart';
+import 'package:nutrihome/controller/firestore_provider.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/model/cartitemmodel.dart';
-import 'package:nutrihome/model/productsmodel.dart';
+import 'package:nutrihome/model/cart_item_model.dart';
 import 'package:provider/provider.dart';
 
 class CartItems extends StatelessWidget {

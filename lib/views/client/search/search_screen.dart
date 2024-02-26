@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/widgets/productsgrid.dart';
+import 'package:nutrihome/views/widgets/products_grid.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});

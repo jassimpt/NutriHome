@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nutrihome/controller/firestore_provider.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/client/profile/widgets/orderslist.dart';
-import 'package:nutrihome/views/widgets/custombackbutton.dart';
+import 'package:nutrihome/views/client/wishlist/widgets/wishlist_items.dart';
+import 'package:provider/provider.dart';
 
-class OrdersScreen extends StatelessWidget {
-  const OrdersScreen({super.key});
+class WishListScreen extends StatefulWidget {
+  const WishListScreen({super.key});
+
+  @override
+  State<WishListScreen> createState() => _WishListScreenState();
+}
+
+class _WishListScreenState extends State<WishListScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<FirestoreProvider>(context, listen: false).fetchWishListItems();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,43 +33,30 @@ class OrdersScreen extends StatelessWidget {
                 height: 20,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  CustomBackButton(
-                      size: size,
-                      color: extrabgcolor,
-                      bottom: 0,
-                      left: 30,
-                      right: 30,
-                      top: 0,
-                      child: const Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                      )),
-                  SizedBox(
-                    width: size.width * 0.08,
-                  ),
                   Text(
                     'My ',
                     style: GoogleFonts.poppins(
-                        fontSize: 25,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: fontcolor),
                   ),
                   Text(
-                    "Orders",
+                    "Wishlist",
                     style: GoogleFonts.poppins(
-                        fontSize: 25,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: componentcolor),
                   ),
                 ],
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15),
-                child: OrdersList(size: size),
+              const Padding(
+                padding: EdgeInsets.only(left: 15, right: 15),
+                child: WishlistItems(),
               ),
             ],
           ),

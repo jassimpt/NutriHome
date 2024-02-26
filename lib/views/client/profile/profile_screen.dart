@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:nutrihome/controller/authprovider.dart';
+import 'package:nutrihome/controller/auth_provider.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/client/profile/addressscreen.dart';
-import 'package:nutrihome/views/client/profile/ordersscreen.dart';
+import 'package:nutrihome/views/client/profile/address_screen.dart';
+import 'package:nutrihome/views/client/profile/orders_screen.dart';
 import 'package:nutrihome/views/client/profile/widgets/profilerow.dart';
-import 'package:nutrihome/views/widgets/custombackbutton.dart';
+import 'package:nutrihome/views/widgets/custom_back_button.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/views/client/profile/widgets/orderslist.dart';
-import 'package:nutrihome/views/widgets/custombackbutton.dart';
+import 'package:nutrihome/views/widgets/custom_back_button.dart';
 
-class OrdersAdmin extends StatelessWidget {
-  const OrdersAdmin({super.key});
+class OrdersScreen extends StatelessWidget {
+  const OrdersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,10 +21,23 @@ class OrdersAdmin extends StatelessWidget {
                 height: 20,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  CustomBackButton(
+                      size: size,
+                      color: extrabgcolor,
+                      bottom: 0,
+                      left: 30,
+                      right: 30,
+                      top: 0,
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                      )),
+                  SizedBox(
+                    width: size.width * 0.08,
+                  ),
                   Text(
-                    'All ',
+                    'My ',
                     style: GoogleFonts.poppins(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,

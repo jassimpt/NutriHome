@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/client/cart/cartscreen.dart';
-import 'package:nutrihome/views/client/home/homescree.dart';
-import 'package:nutrihome/views/client/search/searchscreen.dart';
-import 'package:nutrihome/views/client/wishlist/wishlistscreen.dart';
+import 'package:nutrihome/views/Admin/all_users/all_users.dart';
+import 'package:nutrihome/views/Admin/home/admin_home.dart';
+import 'package:nutrihome/views/Admin/orders/orders_admin.dart';
 
-class BottomNav extends StatefulWidget {
-  const BottomNav({super.key});
+class BottomNavAdmin extends StatefulWidget {
+  const BottomNavAdmin({super.key});
 
   @override
-  State<BottomNav> createState() => _BottomNavState();
+  State<BottomNavAdmin> createState() => _BottomNavAdminState();
 }
 
-class _BottomNavState extends State<BottomNav> {
+class _BottomNavAdminState extends State<BottomNavAdmin> {
   int selectedindex = 0;
   void pageChanger(int index) {
     setState(() {
@@ -23,10 +22,10 @@ class _BottomNavState extends State<BottomNav> {
   }
 
   List pages = [
-    const Homescreen(),
-    const SearchScreen(),
-    const CartScreen(),
-    const WishListScreen()
+    const AdminHome(),
+    const OrdersAdmin(),
+    const AllUsers(),
+    // const WishListScreen()
   ];
 
   @override
@@ -46,16 +45,12 @@ class _BottomNavState extends State<BottomNav> {
             text: 'Home',
           ),
           GButton(
-            icon: Iconsax.search_favorite,
-            text: "Search",
-          ),
-          GButton(
             icon: Iconsax.shopping_bag,
-            text: "Cart",
+            text: "Orders",
           ),
           GButton(
-            icon: Iconsax.heart4,
-            text: "Wishlist",
+            icon: Iconsax.user,
+            text: "Users",
           ),
         ],
       ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nutrihome/controller/firestoreprovider.dart';
+import 'package:nutrihome/controller/firestore_provider.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/views/client/cart/widgets/cartitems.dart';
-import 'package:nutrihome/views/widgets/customlongbutton.dart';
+import 'package:nutrihome/views/client/cart/widgets/cart_items.dart';
+import 'package:nutrihome/views/widgets/custom_long_button.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {

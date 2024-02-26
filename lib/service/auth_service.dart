@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:nutrihome/model/usermodel.dart';
+import 'package:nutrihome/model/user_model.dart';
 import 'package:nutrihome/views/login/otpscreen.dart';
-import 'package:pinput/pinput.dart';
 
 class AuthService {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
