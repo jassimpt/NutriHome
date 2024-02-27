@@ -22,6 +22,7 @@ class _HomescreenState extends State<Homescreen> {
   void initState() {
     super.initState();
     Provider.of<FirestoreProvider>(context, listen: false).fetchAllProducts();
+    Provider.of<FirestoreProvider>(context, listen: false).fetchCartItems();
   }
 
   @override

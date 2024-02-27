@@ -104,4 +104,12 @@ class FirestoreProvider extends ChangeNotifier {
       throw Exception(e);
     }
   }
+
+  deleteWishlistItem({required String productname}) {
+    return service.deleteWishlistItem(productname);
+  }
+
+  deleteCartItem({required String productname}) {
+    return service.deleteCartItem(productname);
+  }
 }

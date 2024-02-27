@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:nutrihome/controller/firestore_provider.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/views/client/cart/widgets/cart_items.dart';
@@ -15,15 +16,15 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Provider.of<FirestoreProvider>(context, listen: false).fetchCartItems();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final pro = Provider.of<FirestoreProvider>(context, listen: true);
+
+    var totalAmount = pro.cartlist.isNotEmpty
+        ? pro.cartlist
+            .map((product) => (product.price ?? 0) * (product.quantity ?? 0))
+            .reduce((value, element) => value + element)
+        : 0.0;
     return Scaffold(
       backgroundColor: backgroundcolor,
       body: SafeArea(
@@ -56,39 +57,48 @@ class _CartScreenState extends State<CartScreen> {
               const SizedBox(
                 height: 10,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15, right: 15),
-                child: CartItems(size: size),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                child: Consumer<FirestoreProvider>(
-                  builder: (context, value, child) => Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Total ${value.cartlist.length} Items :',
-                        style: GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: fontcolor),
-                      ),
-                      Text(
-                        '₹ 500',
-                        style: GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: fontcolor),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              CustomLongButton(
-                size: size,
-                onTap: () {},
-                buttonname: "Proceed to checkout",
-              )
+              pro.cartlist.isNotEmpty
+                  ? Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 15, right: 15),
+                          child: CartItems(size: size),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                          child: Consumer<FirestoreProvider>(
+                            builder: (context, value, child) => Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Total ${value.cartlist.length} Items :',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: fontcolor),
+                                ),
+                                Text(
+                                  totalAmount.toString(),
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: fontcolor),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        CustomLongButton(
+                          size: size,
+                          onTap: () {},
+                          buttonname: "Proceed to checkout",
+                        )
+                      ],
+                    )
+                  : Center(
+                      child: LottieBuilder.asset(
+                          'assets/lottie/Animation - 1709009620778.json'),
+                    )
             ],
           ),
         ),

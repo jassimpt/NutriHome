@@ -43,4 +43,30 @@ class FirestoreService {
       throw Exception(e);
     }
   }
+
+  deleteWishlistItem(String productname) async {
+    try {
+      await firestore
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection('wishlist')
+          .doc(productname)
+          .delete();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  deleteCartItem(String productname) async {
+    try {
+      await firestore
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection("cart")
+          .doc(productname)
+          .delete();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }

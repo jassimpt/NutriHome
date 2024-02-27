@@ -15,8 +15,8 @@ class CartItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<FirestoreProvider>(
-      builder: (context, value, child) => ListView.builder(
+    return Consumer<FirestoreProvider>(builder: (context, value, child) {
+      return ListView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         itemCount: value.cartlist.length,
@@ -99,7 +99,7 @@ class CartItems extends StatelessWidget {
                                         ),
                                       ),
                                       Text(
-                                        value.quantity.toString(),
+                                        product.quantity.toString(),
                                         style: GoogleFonts.poppins(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
@@ -123,7 +123,10 @@ class CartItems extends StatelessWidget {
                               ),
                             ),
                             IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  value.deleteCartItem(
+                                      productname: product.name!);
+                                },
                                 icon: const Icon(
                                   Icons.delete,
                                   color: Colors.white,
@@ -138,7 +141,7 @@ class CartItems extends StatelessWidget {
             ),
           );
         },
-      ),
-    );
+      );
+    });
   }
 }
