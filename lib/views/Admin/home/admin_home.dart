@@ -190,7 +190,7 @@ class _AdminHomeState extends State<AdminHome> {
             ),
           ),
         ),
-        ProductsGrid(size: size),
+        ProductsGrid(size: size, page: "main"),
       ]),
     );
   }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:nutrihome/controller/firestore_provider.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/views/widgets/products_grid.dart';
+import 'package:provider/provider.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -54,25 +56,33 @@ class SearchScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(25, 20, 25, 20),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.search),
-                        prefixIconColor: Colors.white.withOpacity(0.5),
-                        hintText: 'Search',
-                        hintStyle:
-                            TextStyle(color: Colors.white.withOpacity(0.5)),
-                        filled: true,
-                        fillColor: productbgcolor,
-                        border: const OutlineInputBorder(
-                            borderSide: BorderSide.none,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15)))),
+                  child: Consumer<FirestoreProvider>(
+                    builder: (context, pro, child) => TextFormField(
+                      onChanged: (value) {
+                        pro.searchProducts(value);
+                      },
+                      decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.search),
+                          prefixIconColor: Colors.white.withOpacity(0.5),
+                          hintText: 'Search',
+                          hintStyle:
+                              TextStyle(color: Colors.white.withOpacity(0.5)),
+                          filled: true,
+                          fillColor: productbgcolor,
+                          border: const OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)))),
+                    ),
                   ),
                 )
               ],
             ),
           ),
-          ProductsGrid(size: size)
+          ProductsGrid(
+            size: size,
+            page: "search",
+          )
         ],
       ),
     );

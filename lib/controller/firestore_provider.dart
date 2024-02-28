@@ -8,6 +8,7 @@ class FirestoreProvider extends ChangeNotifier {
   List<ProductsModel> prodcuctslist = [];
   List<CartItemModel> cartlist = [];
   List<ProductsModel> wishlist = [];
+  List<ProductsModel> searchedproducts = [];
   int quantity = 1;
   addProduct({required ProductsModel product, required String category}) {
     return service.addProductAdmin(product, category);
@@ -111,5 +112,14 @@ class FirestoreProvider extends ChangeNotifier {
 
   deleteCartItem({required String productname}) {
     return service.deleteCartItem(productname);
+  }
+
+  List<ProductsModel> searchProducts(String query) {
+    searchedproducts = prodcuctslist
+        .where((ProductsModel product) =>
+            product.name!.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+    notifyListeners();
+    return searchedproducts;
   }
 }

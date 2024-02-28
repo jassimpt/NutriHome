@@ -172,7 +172,7 @@ class _HomescreenState extends State<Homescreen> {
             ],
           ),
         ),
-        ProductsGrid(size: size),
+        ProductsGrid(size: size, page: "main"),
       ]),
     );
   }
