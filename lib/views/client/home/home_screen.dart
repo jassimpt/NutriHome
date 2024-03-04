@@ -6,7 +6,7 @@ import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/model/categories_model.dart';
 import 'package:nutrihome/views/client/home/widgets/custom_drawer_button.dart';
 import 'package:nutrihome/views/client/home/widgets/poster_carousal.dart';
-import 'package:nutrihome/views/client/profile/profile_screen.dart';
+import 'package:nutrihome/views/client/profile/profile_section.dart';
 import 'package:nutrihome/views/widgets/products_grid.dart';
 import 'package:provider/provider.dart';
 
@@ -21,8 +21,10 @@ class _HomescreenState extends State<Homescreen> {
   @override
   void initState() {
     super.initState();
-    Provider.of<FirestoreProvider>(context, listen: false).fetchAllProducts();
-    Provider.of<FirestoreProvider>(context, listen: false).fetchCartItems();
+    final pro = Provider.of<FirestoreProvider>(context, listen: false);
+    pro.fetchAllProducts();
+    pro.fetchCartItems();
+    pro.fetchCurrentUser();
   }
 
   @override
@@ -38,23 +40,14 @@ class _HomescreenState extends State<Homescreen> {
             children: [
               SafeArea(
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    CustomDrawerButton(
-                      size: size,
-                      onTap: () {},
-                      child: Image.asset(
-                        'assets/icons/menu.png',
-                        height: 30,
-                      ),
-                    ),
                     CustomDrawerButton(
                       size: size,
                       onTap: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => ProfileScreen(),
+                              builder: (context) => const ProfileScreen(),
                             ));
                       },
                       child: Text(

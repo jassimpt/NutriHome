@@ -5,6 +5,7 @@ import 'package:nutrihome/controller/auth_provider.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/views/client/profile/address_screen.dart';
 import 'package:nutrihome/views/client/profile/orders_screen.dart';
+import 'package:nutrihome/views/client/profile/personal_details.dart';
 import 'package:nutrihome/views/client/profile/widgets/profilerow.dart';
 import 'package:nutrihome/views/widgets/custom_back_button.dart';
 import 'package:provider/provider.dart';
@@ -122,7 +123,13 @@ class ProfileScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         ProfileRow(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PersonalDetailsScreen(),
+                                ));
+                          },
                           size: size,
                           text: "Personal Details",
                           child: const Icon(

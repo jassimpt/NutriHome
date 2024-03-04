@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nutrihome/model/cart_item_model.dart';
 import 'package:nutrihome/model/products_model.dart';
+import 'package:nutrihome/model/user_model.dart';
 import 'package:nutrihome/service/firestore_service.dart';
 
 class FirestoreProvider extends ChangeNotifier {
@@ -9,7 +11,22 @@ class FirestoreProvider extends ChangeNotifier {
   List<CartItemModel> cartlist = [];
   List<ProductsModel> wishlist = [];
   List<ProductsModel> searchedproducts = [];
+  UserModel? currentUser;
   int quantity = 1;
+
+  fetchCurrentUser() async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> snapshot = await service.firestore
+          .collection("users")
+          .doc(service.auth.currentUser!.uid)
+          .get();
+      currentUser = UserModel.fromJson(snapshot.data()!);
+      notifyListeners();
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
   addProduct({required ProductsModel product, required String category}) {
     return service.addProductAdmin(product, category);
   }
