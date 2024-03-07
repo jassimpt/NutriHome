@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:nutrihome/controller/auth_provider.dart';
+import 'package:nutrihome/controller/firestore_provider.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/views/client/profile/address_screen.dart';
 import 'package:nutrihome/views/client/profile/orders_screen.dart';
@@ -61,52 +62,60 @@ class ProfileScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
-                child: Container(
-                  width: size.width,
-                  height: size.height * 0.12,
-                  decoration: BoxDecoration(
-                      color: productbgcolor,
-                      borderRadius: BorderRadius.circular(15)),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Container(
-                          height: size.height * 0.1,
-                          width: size.width * 0.3,
-                          decoration: BoxDecoration(
-                              image: const DecorationImage(
-                                  image: AssetImage("assets/icons/user.png"),
-                                  fit: BoxFit.cover),
-                              color: extrabgcolor,
-                              borderRadius: BorderRadius.circular(15)),
+                child: Consumer<FirestoreProvider>(
+                  builder: (context, value, child) => Container(
+                    width: size.width,
+                    height: size.height * 0.12,
+                    decoration: BoxDecoration(
+                        color: productbgcolor,
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Container(
+                            height: size.height * 0.1,
+                            width: size.width * 0.3,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: value.currentUser!.image != null
+                                        ? NetworkImage(
+                                            value.currentUser!.image!)
+                                        : const AssetImage(
+                                                "assets/icons/profile.png")
+                                            as ImageProvider,
+                                    fit: BoxFit.cover),
+                                color: extrabgcolor,
+                                borderRadius: BorderRadius.circular(15)),
+                          ),
                         ),
-                      ),
-                      Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
-                            child: Text(
-                              "Jhon Sebastian",
-                              style: GoogleFonts.urbanist(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: fontcolor,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                              child: Text(
+                                value.currentUser!.username!,
+                                style: GoogleFonts.urbanist(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: fontcolor,
+                                ),
                               ),
                             ),
-                          ),
-                          Text(
-                            "jhon@gmail.com",
-                            style: GoogleFonts.urbanist(
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white.withOpacity(0.5),
+                            Text(
+                              value.currentUser!.email!,
+                              style: GoogleFonts.urbanist(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white.withOpacity(0.5),
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -127,7 +136,8 @@ class ProfileScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => PersonalDetailsScreen(),
+                                  builder: (context) =>
+                                      const PersonalDetailsScreen(),
                                 ));
                           },
                           size: size,
@@ -142,7 +152,7 @@ class ProfileScreen extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => OrdersScreen(),
+                                    builder: (context) => const OrdersScreen(),
                                   ));
                             },
                             size: size,
@@ -156,7 +166,8 @@ class ProfileScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => AddressListScreen(),
+                                  builder: (context) =>
+                                      const AddressListScreen(),
                                 ));
                           },
                           size: size,
@@ -175,7 +186,6 @@ class ProfileScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 30),
                 child: Container(
                   width: size.width,
-                  height: size.height * 0.32,
                   decoration: BoxDecoration(
                       color: productbgcolor,
                       borderRadius: BorderRadius.circular(15)),
@@ -183,29 +193,17 @@ class ProfileScreen extends StatelessWidget {
                     padding: const EdgeInsets.all(20),
                     child: Column(
                       children: [
-                        ProfileRow(
-                            onTap: () {},
-                            size: size,
-                            text: "FAQs",
-                            child: Image.asset("assets/icons/faq.png")),
-                        ProfileRow(
-                          onTap: () {},
-                          size: size,
-                          text: "Privacy policy",
-                          child: const Icon(
-                            Icons.privacy_tip,
-                            color: Colors.white,
-                          ),
-                        ),
-                        ProfileRow(
-                          onTap: () {},
-                          size: size,
-                          text: "Contact us",
-                          child: const Icon(
-                            Icons.contact_emergency,
-                            color: Colors.white,
-                          ),
-                        ),
+                        // ProfileRow(
+                        //   onTap: () {},
+                        //   size: size,
+                        //   text: "Privacy policy",
+                        //   child: const Icon(
+                        //     Icons.privacy_tip,
+                        //     color: Colors.white,
+                        //   ),
+                        // ),
+                        //
+
                         ProfileRow(
                             size: size,
                             text: "Logout",

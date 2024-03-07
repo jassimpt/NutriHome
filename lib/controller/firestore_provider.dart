@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:nutrihome/model/address_model.dart';
 import 'package:nutrihome/model/cart_item_model.dart';
 import 'package:nutrihome/model/products_model.dart';
 import 'package:nutrihome/model/user_model.dart';
@@ -11,8 +12,10 @@ class FirestoreProvider extends ChangeNotifier {
   List<CartItemModel> cartlist = [];
   List<ProductsModel> wishlist = [];
   List<ProductsModel> searchedproducts = [];
+  List<AddressModel> addresslist = [];
   UserModel? currentUser;
   int quantity = 1;
+  String? downloadurl;
 
   fetchCurrentUser() async {
     try {
@@ -138,5 +141,48 @@ class FirestoreProvider extends ChangeNotifier {
         .toList();
     notifyListeners();
     return searchedproducts;
+  }
+
+  addUserImage({required String username, required fileimage}) async {
+    return service.addUserImage(username: username, fileimage: fileimage);
+  }
+
+  updateUserInfo(
+      {required String email,
+      required String username,
+      required String image,
+      required String phonenumber}) {
+    return service.updateUserInfo(
+        email: email,
+        username: username,
+        image: image,
+        phonenumber: phonenumber);
+  }
+
+  saveUserAddress({required String landmark, required AddressModel address}) {
+    return service.saveUserAddress(landmark: landmark, address: address);
+  }
+
+  fetchUserAddress() {
+    try {
+      service.firestore
+          .collection('users')
+          .doc(service.auth.currentUser!.uid)
+          .collection("address")
+          .snapshots()
+          .listen((address) {
+        addresslist = address.docs
+            .map((doc) => AddressModel.fromJson(doc.data()))
+            .toList();
+        notifyListeners();
+      });
+      return addresslist;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  deleteUserAddress({required String landmark}) {
+    return service.deleteUserAddress(landmark: landmark);
   }
 }

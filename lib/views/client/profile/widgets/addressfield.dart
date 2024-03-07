@@ -29,6 +29,7 @@ class AddressFields extends StatelessWidget {
         SizedBox(
           width: width,
           child: TextFormField(
+            style: TextStyle(color: fontcolor),
             controller: controller,
             maxLines: maxlines,
             decoration: InputDecoration(

@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/controller/auth_provider.dart';
 import 'package:nutrihome/controller/firestore_provider.dart';
 
 import 'package:nutrihome/helpers/colors.dart';
+import 'package:nutrihome/views/client/profile/personal_details_edit_screen.dart';
 
 import 'package:nutrihome/views/widgets/custom_back_button.dart';
 import 'package:provider/provider.dart';
 
-class PersonalDetailsScreen extends StatelessWidget {
+class PersonalDetailsScreen extends StatefulWidget {
   const PersonalDetailsScreen({super.key});
+
+  @override
+  State<PersonalDetailsScreen> createState() => _PersonalDetailsScreenState();
+}
+
+class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Provider.of<FirestoreProvider>(context, listen: false).fetchCurrentUser();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,32 +51,26 @@ class PersonalDetailsScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  Text(
-                    'My ',
-                    style: GoogleFonts.poppins(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: fontcolor),
-                  ),
-                  Text(
-                    "Profile",
-                    style: GoogleFonts.poppins(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                        color: componentcolor),
-                  ),
                 ],
               ),
               SizedBox(
                 height: size.height * 0.02,
               ),
               Center(
-                child: Container(
-                  width: size.width * 0.3,
-                  height: size.height * 0.15,
-                  decoration: BoxDecoration(
-                      color: productbgcolor,
-                      borderRadius: BorderRadius.circular(15)),
+                child: Consumer<FirestoreProvider>(
+                  builder: (context, value, child) => Container(
+                    width: size.width * 0.3,
+                    height: size.height * 0.15,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: value.currentUser!.image != null
+                                ? NetworkImage(value.currentUser!.image!)
+                                : const AssetImage("assets/icons/profile.png")
+                                    as ImageProvider,
+                            fit: BoxFit.cover),
+                        color: productbgcolor,
+                        borderRadius: BorderRadius.circular(15)),
+                  ),
                 ),
               ),
               SizedBox(
@@ -112,7 +118,7 @@ class PersonalDetailsScreen extends StatelessWidget {
                             ),
                             SizedBox(width: size.width * 0.1),
                             Text(
-                              '9961666937',
+                              pro.currentUser!.phonenumber ?? " not available",
                               style: GoogleFonts.urbanist(
                                   fontSize: 22,
                                   color: Colors.white,
@@ -155,7 +161,7 @@ class PersonalDetailsScreen extends StatelessWidget {
                         children: [
                           SizedBox(
                               width: size.width * 0.3,
-                              height: size.height * 0.06,
+                              height: size.height * 0.05,
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                     backgroundColor:
@@ -165,15 +171,26 @@ class PersonalDetailsScreen extends StatelessWidget {
                                         RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(15)))),
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            PersonalDetailsEditScreen(
+                                          currentuser: pro.currentUser!,
+                                        ),
+                                      ));
+                                },
                                 child: const Text(
                                   'Edit',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               )),
                           SizedBox(
                               width: size.width * 0.3,
-                              height: size.height * 0.06,
+                              height: size.height * 0.05,
                               child: ElevatedButton(
                                 style: ButtonStyle(
                                     backgroundColor:
@@ -190,7 +207,9 @@ class PersonalDetailsScreen extends StatelessWidget {
                                 },
                                 child: const Text(
                                   'Log out',
-                                  style: TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
                                 ),
                               )),
                         ],
