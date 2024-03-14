@@ -14,7 +14,7 @@ class AuthGate extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           if (snapshot.data!.email == "admin@gmail.com") {
-            return BottomNavAdmin();
+            return const BottomNavAdmin();
           } else {
             return const BottomNav();
           }

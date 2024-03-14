@@ -7,10 +7,12 @@ import 'package:nutrihome/views/client/details/details_screen.dart';
 import 'package:provider/provider.dart';
 
 class ProductsGrid extends StatelessWidget {
-  const ProductsGrid({super.key, required this.size, required this.page});
+  const ProductsGrid({
+    super.key,
+    required this.size,
+  });
 
   final Size size;
-  final String page;
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +23,9 @@ class ProductsGrid extends StatelessWidget {
           childAspectRatio: 0.8,
         ),
         delegate: SliverChildBuilderDelegate(
-          childCount: page == "search"
-              ? value.searchedproducts.length
-              : value.prodcuctslist.length,
+          childCount: value.prodcuctslist.length,
           (context, index) {
-            final ProductsModel products = page == "search"
-                ? value.searchedproducts[index]
-                : value.prodcuctslist[index];
+            final ProductsModel products = value.prodcuctslist[index];
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(

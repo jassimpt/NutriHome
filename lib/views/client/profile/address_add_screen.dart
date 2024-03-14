@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/controller/firestore_provider.dart';
+import 'package:nutrihome/controller/location_controller.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/model/address_model.dart';
 import 'package:nutrihome/views/client/profile/widgets/addressfield.dart';
@@ -9,13 +11,6 @@ import 'package:provider/provider.dart';
 
 class AddressAddScreen extends StatelessWidget {
   AddressAddScreen({super.key});
-
-  final TextEditingController namecontroller = TextEditingController();
-  final TextEditingController countrycontroller = TextEditingController();
-  final TextEditingController citycontroller = TextEditingController();
-  final TextEditingController phonecontroller = TextEditingController();
-  final TextEditingController landmarkcontroller = TextEditingController();
-  final TextEditingController addresscontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -59,78 +54,111 @@ class AddressAddScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
-                child: Column(
-                  children: [
-                    AddressFields(
-                      controller: namecontroller,
-                      text: "Name",
-                      width: size.width,
-                      maxlines: 1,
-                    ),
-                    Row(
-                      children: [
-                        AddressFields(
-                          controller: countrycontroller,
-                          maxlines: 1,
-                          text: "Country",
-                          width: size.width * 0.43,
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        AddressFields(
-                          controller: citycontroller,
-                          maxlines: 1,
-                          text: "City",
-                          width: size.width * 0.43,
-                        ),
-                      ],
-                    ),
-                    AddressFields(
-                      controller: phonecontroller,
-                      text: "Phone Number",
-                      width: size.width,
-                      maxlines: 1,
-                    ),
-                    AddressFields(
-                      controller: addresscontroller,
-                      maxlines: 1,
-                      text: "Address",
-                      width: size.width,
-                    ),
-                    AddressFields(
-                      controller: landmarkcontroller,
-                      maxlines: 1,
-                      text: "Landmark",
-                      width: size.width,
-                    ),
-                    SizedBox(
-                      height: size.height * 0.1,
-                    ),
-                    SizedBox(
-                      height: size.height * 0.06,
-                      width: size.width,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15))),
-                            backgroundColor:
-                                const MaterialStatePropertyAll(componentcolor)),
-                        onPressed: () {
-                          saveAddress(context);
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          "Save Address",
-                          style: GoogleFonts.urbanist(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: fontcolor),
+                child: Consumer<LocationController>(
+                  builder: (context, value, child) => Column(
+                    children: [
+                      SizedBox(
+                        width: size.width,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              shape: MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15))),
+                              backgroundColor: MaterialStatePropertyAll(
+                                  Color.fromRGBO(254, 170, 43, 1))),
+                          onPressed: () {
+                            value.getCurrentLocationAndFillAddress();
+                          },
+                          child: value.isloading
+                              ? Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : Text(
+                                  "Get my current location",
+                                  style: GoogleFonts.urbanist(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: fontcolor),
+                                ),
                         ),
                       ),
-                    )
-                  ],
+                      SizedBox(
+                        height: size.height * 0.02,
+                      ),
+                      AddressFields(
+                        controller: value.namecontroller,
+                        text: "Name",
+                        width: size.width,
+                        maxlines: 1,
+                      ),
+                      Row(
+                        children: [
+                          AddressFields(
+                            controller: value.countrycontroller,
+                            maxlines: 1,
+                            text: "Country",
+                            width: size.width * 0.43,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          AddressFields(
+                            controller: value.citycontroller,
+                            maxlines: 1,
+                            text: "City",
+                            width: size.width * 0.43,
+                          ),
+                        ],
+                      ),
+                      AddressFields(
+                        controller: value.phonecontroller,
+                        text: "Phone Number",
+                        width: size.width,
+                        maxlines: 1,
+                      ),
+                      AddressFields(
+                        controller: value.addresscontroller,
+                        maxlines: 1,
+                        text: "Address",
+                        width: size.width,
+                      ),
+                      AddressFields(
+                        controller: value.landmarkcontroller,
+                        maxlines: 1,
+                        text: "Landmark",
+                        width: size.width,
+                      ),
+                      SizedBox(
+                        height: size.height * 0.05,
+                      ),
+                      SizedBox(
+                        height: size.height * 0.06,
+                        width: size.width,
+                        child: ElevatedButton(
+                          style: ButtonStyle(
+                              shape: MaterialStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15))),
+                              backgroundColor: const MaterialStatePropertyAll(
+                                  componentcolor)),
+                          onPressed: () {
+                            saveAddress(context);
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            "Save Address",
+                            style: GoogleFonts.urbanist(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: fontcolor),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               )
             ],
@@ -142,13 +170,20 @@ class AddressAddScreen extends StatelessWidget {
 
   saveAddress(BuildContext context) {
     final pro = Provider.of<FirestoreProvider>(context, listen: false);
+    final locationpro = Provider.of<LocationController>(context, listen: false);
     AddressModel address = AddressModel(
-        address: addresscontroller.text,
-        city: citycontroller.text,
-        country: countrycontroller.text,
-        landmark: landmarkcontroller.text,
-        name: namecontroller.text,
-        phonenumber: phonecontroller.text);
-    pro.saveUserAddress(landmark: landmarkcontroller.text, address: address);
+        address: locationpro.addresscontroller.text,
+        city: locationpro.citycontroller.text,
+        country: locationpro.countrycontroller.text,
+        landmark: locationpro.landmarkcontroller.text,
+        name: locationpro.namecontroller.text,
+        phonenumber: locationpro.phonecontroller.text);
+    pro.saveUserAddress(
+        landmark: locationpro.landmarkcontroller.text, address: address);
+    IconSnackBar.show(
+        context: context,
+        snackBarType: SnackBarType.save,
+        label: 'Address saved');
+    Navigator.pop(context);
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nutrihome/controller/auth_provider.dart';
 import 'package:nutrihome/controller/firestore_provider.dart';
 import 'package:nutrihome/controller/image_provider.dart';
+import 'package:nutrihome/controller/location_controller.dart';
 import 'package:nutrihome/firebase_options.dart';
 import 'package:nutrihome/views/login/authgate.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,9 @@ class Myapp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => ImageController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LocationController(),
         )
       ],
       child: const MaterialApp(

@@ -191,31 +191,30 @@ class ProfileScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15)),
                   child: Padding(
                     padding: const EdgeInsets.all(20),
-                    child: Column(
-                      children: [
-                        // ProfileRow(
-                        //   onTap: () {},
-                        //   size: size,
-                        //   text: "Privacy policy",
-                        //   child: const Icon(
-                        //     Icons.privacy_tip,
-                        //     color: Colors.white,
-                        //   ),
-                        // ),
-                        //
-
-                        ProfileRow(
+                    child: Consumer<AuthProvider>(
+                      builder: (context, value, child) => Column(
+                        children: [
+                          ProfileRow(
+                            onTap: () {},
                             size: size,
-                            text: "Logout",
-                            onTap: () {
-                              Provider.of<AuthProvider>(context, listen: false)
-                                  .signOut();
-                            },
+                            text: "Privacy policy",
                             child: const Icon(
-                              Iconsax.logout,
+                              Icons.privacy_tip,
                               color: Colors.white,
-                            ))
-                      ],
+                            ),
+                          ),
+                          ProfileRow(
+                              size: size,
+                              text: "Logout",
+                              onTap: () {
+                                value.signOut();
+                              },
+                              child: const Icon(
+                                Iconsax.logout,
+                                color: Colors.white,
+                              ))
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
@@ -14,7 +12,7 @@ import 'package:nutrihome/views/widgets/custom_back_button.dart';
 import 'package:provider/provider.dart';
 
 class PersonalDetailsEditScreen extends StatefulWidget {
-  PersonalDetailsEditScreen({super.key, required this.currentuser});
+  const PersonalDetailsEditScreen({super.key, required this.currentuser});
 
   final UserModel currentuser;
 

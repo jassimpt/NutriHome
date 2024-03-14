@@ -13,7 +13,10 @@ class FirestoreProvider extends ChangeNotifier {
   List<ProductsModel> wishlist = [];
   List<ProductsModel> searchedproducts = [];
   List<AddressModel> addresslist = [];
+  List<String> categorieslist = [];
+  String? selectedCategory;
   UserModel? currentUser;
+  String searchQuery = "";
   int quantity = 1;
   String? downloadurl;
 
@@ -34,9 +37,28 @@ class FirestoreProvider extends ChangeNotifier {
     return service.addProductAdmin(product, category);
   }
 
-  List<ProductsModel> fetchAllProducts() {
+  fetchAllCategories() {
     try {
-      service.firestore.collection('products').snapshots().listen((product) {
+      service.firestore.collection("products").snapshots().listen((product) {
+        categorieslist = product.docs
+            .map((doc) => ProductsModel.fromJson(doc.data()).category!)
+            .toSet()
+            .toList();
+        notifyListeners();
+      });
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  List<ProductsModel> fetchProductsByCategory({required String category}) {
+    try {
+      prodcuctslist.clear();
+      service.firestore
+          .collection('products')
+          .where("category", isEqualTo: category)
+          .snapshots()
+          .listen((product) {
         prodcuctslist = product.docs
             .map((doc) => ProductsModel.fromJson(doc.data()))
             .toList();
@@ -45,6 +67,30 @@ class FirestoreProvider extends ChangeNotifier {
       return prodcuctslist;
     } catch (e) {
       throw Exception(e);
+    }
+  }
+
+  List<ProductsModel> fetchProducts() {
+    if (searchQuery.isNotEmpty) {
+      // Fetch searched products
+      service.firestore.collection('products').snapshots().listen((product) {
+        prodcuctslist = product.docs
+            .map((doc) => ProductsModel.fromJson(doc.data()))
+            .where((ProductsModel product) =>
+                product.name!.toLowerCase().contains(searchQuery.toLowerCase()))
+            .toList();
+        notifyListeners();
+      });
+      return prodcuctslist;
+    } else {
+      // Fetch all products
+      service.firestore.collection('products').snapshots().listen((product) {
+        prodcuctslist = product.docs
+            .map((doc) => ProductsModel.fromJson(doc.data()))
+            .toList();
+        notifyListeners();
+      });
+      return prodcuctslist;
     }
   }
 
@@ -134,13 +180,9 @@ class FirestoreProvider extends ChangeNotifier {
     return service.deleteCartItem(productname);
   }
 
-  List<ProductsModel> searchProducts(String query) {
-    searchedproducts = prodcuctslist
-        .where((ProductsModel product) =>
-            product.name!.toLowerCase().contains(query.toLowerCase()))
-        .toList();
-    notifyListeners();
-    return searchedproducts;
+  searchProducts(String query) {
+    searchQuery = query;
+    fetchProducts();
   }
 
   addUserImage({required String username, required fileimage}) async {
@@ -184,5 +226,9 @@ class FirestoreProvider extends ChangeNotifier {
 
   deleteUserAddress({required String landmark}) {
     return service.deleteUserAddress(landmark: landmark);
+  }
+
+  updateUserAddress({required String landmark, required AddressModel address}) {
+    return service.updateUserAddress(landmark: landmark, address: address);
   }
 }

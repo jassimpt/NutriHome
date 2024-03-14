@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/controller/firestore_provider.dart';
-import 'package:nutrihome/helpers/basics.dart';
 import 'package:nutrihome/helpers/colors.dart';
-import 'package:nutrihome/model/categories_model.dart';
 import 'package:nutrihome/views/client/home/widgets/custom_drawer_button.dart';
 import 'package:nutrihome/views/client/home/widgets/poster_carousal.dart';
 import 'package:nutrihome/views/client/profile/profile_section.dart';
@@ -22,9 +20,10 @@ class _HomescreenState extends State<Homescreen> {
   void initState() {
     super.initState();
     final pro = Provider.of<FirestoreProvider>(context, listen: false);
-    pro.fetchAllProducts();
+    pro.fetchProducts();
     pro.fetchCartItems();
     pro.fetchCurrentUser();
+    pro.fetchAllCategories();
   }
 
   @override
@@ -113,59 +112,52 @@ class _HomescreenState extends State<Homescreen> {
               ),
               SizedBox(
                 height: size.height * 0.08,
-                child: ListView.builder(
-                  itemCount: categories.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    CategoriesModel categorie = categories[index];
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Stack(
-                        children: [
-                          Container(
-                            width: size.width * 0.3,
-                            height: size.height * 0.08,
+                child: Consumer<FirestoreProvider>(
+                  builder: (context, value, child) => ListView.builder(
+                    itemCount: value.categorieslist.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      final String category = value.categorieslist[index];
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            value.fetchProductsByCategory(category: category);
+                            value.selectedCategory = category;
+                          },
+                          child: Container(
+                            width: size.width * 0.25,
+                            height: size.height * 0.05,
                             decoration: BoxDecoration(
+                              border: value.selectedCategory == category
+                                  ? Border.all(color: componentcolor)
+                                  : Border.all(color: Colors.transparent),
                               color: productbgcolor,
                               borderRadius: BorderRadius.circular(15),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Container(
-                              width: size.width * 0.1,
-                              height: size.height * 0.05,
-                              decoration: BoxDecoration(
-                                color: extrabgcolor,
-                                image: DecorationImage(
-                                  image: AssetImage(categorie.image!),
+                            child: Center(
+                              child: Text(
+                                category,
+                                style: GoogleFonts.urbanist(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  color: fontcolor,
                                 ),
-                                borderRadius: BorderRadius.circular(10),
                               ),
                             ),
                           ),
-                          Positioned(
-                            bottom: 15,
-                            left: 55,
-                            child: Text(
-                              categorie.category!,
-                              style: GoogleFonts.urbanist(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                color: fontcolor,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    );
-                  },
+                        ),
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        ProductsGrid(size: size, page: "main"),
+        ProductsGrid(
+          size: size,
+        ),
       ]),
     );
   }

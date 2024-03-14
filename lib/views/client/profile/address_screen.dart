@@ -4,6 +4,7 @@ import 'package:nutrihome/controller/firestore_provider.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/model/address_model.dart';
 import 'package:nutrihome/views/client/profile/address_add_screen.dart';
+import 'package:nutrihome/views/client/profile/address_edit_screen.dart';
 import 'package:nutrihome/views/widgets/custom_back_button.dart';
 import 'package:nutrihome/views/widgets/custom_long_button.dart';
 import 'package:provider/provider.dart';
@@ -105,7 +106,16 @@ class _AddressListScreenState extends State<AddressListScreen> {
                                     Row(
                                       children: [
                                         IconButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        AddressEditScreen(
+                                                      address: address,
+                                                    ),
+                                                  ));
+                                            },
                                             icon: Image.asset(
                                               "assets/icons/🦆 icon _edit_.png",
                                               height: 20,

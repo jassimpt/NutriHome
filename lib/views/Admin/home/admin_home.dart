@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:nutrihome/controller/auth_provider.dart';
 import 'package:nutrihome/controller/firestore_provider.dart';
 import 'package:nutrihome/helpers/basics.dart';
 import 'package:nutrihome/helpers/colors.dart';
@@ -20,9 +22,8 @@ class AdminHome extends StatefulWidget {
 class _AdminHomeState extends State<AdminHome> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Provider.of<FirestoreProvider>(context, listen: false).fetchAllProducts();
+    Provider.of<FirestoreProvider>(context, listen: false).fetchProducts();
   }
 
   @override
@@ -44,37 +45,64 @@ class _AdminHomeState extends State<AdminHome> {
                   padding: const EdgeInsets.only(
                     left: 30,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        'Admin',
-                        style: GoogleFonts.urbanist(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: fontcolor,
-                        ),
-                      ),
-                      Row(
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Lets manage ",
+                            'Admin',
                             style: GoogleFonts.urbanist(
-                              fontSize: 20,
+                              fontSize: 40,
                               fontWeight: FontWeight.bold,
                               color: fontcolor,
                             ),
                           ),
-                          Text(
-                            "the products",
-                            style: GoogleFonts.urbanist(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: componentcolor,
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                "Lets manage ",
+                                style: GoogleFonts.urbanist(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: fontcolor,
+                                ),
+                              ),
+                              Text(
+                                "the products",
+                                style: GoogleFonts.urbanist(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: componentcolor,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+                        child: Consumer<AuthProvider>(
+                          builder: (context, value, child) => Container(
+                            width: size.width * 0.13,
+                            height: size.height * 0.06,
+                            decoration: BoxDecoration(
+                                color: productbgcolor,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Center(
+                              child: IconButton(
+                                  onPressed: () {
+                                    value.signOut();
+                                  },
+                                  icon: const Icon(
+                                    Iconsax.logout,
+                                    color: fontcolor,
+                                  )),
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
@@ -82,21 +110,27 @@ class _AdminHomeState extends State<AdminHome> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.fromLTRB(25, 20, 10, 20),
-                      child: SizedBox(
-                        width: size.width * 0.7,
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              prefixIcon: const Icon(Icons.search),
-                              prefixIconColor: Colors.white.withOpacity(0.5),
-                              hintText: 'Search',
-                              hintStyle: TextStyle(
-                                  color: Colors.white.withOpacity(0.5)),
-                              filled: true,
-                              fillColor: productbgcolor,
-                              border: const OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15)))),
+                      child: Consumer<FirestoreProvider>(
+                        builder: (context, pro, child) => SizedBox(
+                          width: size.width * 0.7,
+                          child: TextFormField(
+                            onChanged: (value) {
+                              pro.searchProducts(value);
+                            },
+                            style: const TextStyle(color: Colors.white),
+                            decoration: InputDecoration(
+                                prefixIcon: const Icon(Icons.search),
+                                prefixIconColor: Colors.white.withOpacity(0.5),
+                                hintText: 'Search',
+                                hintStyle: TextStyle(
+                                    color: Colors.white.withOpacity(0.5)),
+                                filled: true,
+                                fillColor: productbgcolor,
+                                border: const OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)))),
+                          ),
                         ),
                       ),
                     ),
@@ -190,7 +224,9 @@ class _AdminHomeState extends State<AdminHome> {
             ),
           ),
         ),
-        ProductsGrid(size: size, page: "main"),
+        ProductsGrid(
+          size: size,
+        ),
       ]),
     );
   }

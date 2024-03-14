@@ -61,6 +61,7 @@ class SearchScreen extends StatelessWidget {
                       onChanged: (value) {
                         pro.searchProducts(value);
                       },
+                      style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.search),
                           prefixIconColor: Colors.white.withOpacity(0.5),
@@ -81,7 +82,6 @@ class SearchScreen extends StatelessWidget {
           ),
           ProductsGrid(
             size: size,
-            page: "search",
           )
         ],
       ),

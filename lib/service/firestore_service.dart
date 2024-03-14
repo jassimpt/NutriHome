@@ -135,4 +135,18 @@ class FirestoreService {
       throw Exception(e);
     }
   }
+
+  updateUserAddress(
+      {required String landmark, required AddressModel address}) async {
+    try {
+      await firestore
+          .collection("users")
+          .doc(auth.currentUser!.uid)
+          .collection('address')
+          .doc(landmark)
+          .update(address.toJson());
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 }
