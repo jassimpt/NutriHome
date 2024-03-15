@@ -35,7 +35,7 @@ class PhoneAuthScreen extends StatelessWidget {
                   top: 30,
                   size: size,
                   color: extrabgcolor,
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back,
                     color: Colors.white,
                   )),

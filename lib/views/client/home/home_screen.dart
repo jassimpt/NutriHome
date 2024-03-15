@@ -9,7 +9,9 @@ import 'package:nutrihome/views/widgets/products_grid.dart';
 import 'package:provider/provider.dart';
 
 class Homescreen extends StatefulWidget {
-  const Homescreen({Key? key});
+  const Homescreen({
+    super.key,
+  });
 
   @override
   State<Homescreen> createState() => _HomescreenState();

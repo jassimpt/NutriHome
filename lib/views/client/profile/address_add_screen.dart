@@ -10,7 +10,7 @@ import 'package:nutrihome/views/widgets/custom_back_button.dart';
 import 'package:provider/provider.dart';
 
 class AddressAddScreen extends StatelessWidget {
-  AddressAddScreen({super.key});
+  const AddressAddScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -64,14 +64,14 @@ class AddressAddScreen extends StatelessWidget {
                               shape: MaterialStatePropertyAll(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(15))),
-                              backgroundColor: MaterialStatePropertyAll(
+                              backgroundColor: const MaterialStatePropertyAll(
                                   Color.fromRGBO(254, 170, 43, 1))),
                           onPressed: () {
                             value.getCurrentLocationAndFillAddress();
                           },
                           child: value.isloading
-                              ? Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                              ? const Padding(
+                                  padding: EdgeInsets.all(8.0),
                                   child: CircularProgressIndicator(
                                     color: Colors.white,
                                   ),

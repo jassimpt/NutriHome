@@ -19,7 +19,6 @@ class AddressListScreen extends StatefulWidget {
 class _AddressListScreenState extends State<AddressListScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Provider.of<FirestoreProvider>(context, listen: false).fetchUserAddress();
   }
@@ -164,7 +163,7 @@ class _AddressListScreenState extends State<AddressListScreen> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AddressAddScreen(),
+                      builder: (context) => const AddressAddScreen(),
                     ));
               },
               buttonname: "Add new address",

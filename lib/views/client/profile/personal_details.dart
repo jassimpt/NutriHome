@@ -19,7 +19,6 @@ class PersonalDetailsScreen extends StatefulWidget {
 class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     Provider.of<FirestoreProvider>(context, listen: false).fetchCurrentUser();
   }

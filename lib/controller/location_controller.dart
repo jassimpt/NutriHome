@@ -30,7 +30,7 @@ class LocationController extends ChangeNotifier {
       }
       Position position = await Geolocator.getCurrentPosition(
           desiredAccuracy: LocationAccuracy.high,
-          timeLimit: Duration(seconds: 10));
+          timeLimit: const Duration(seconds: 10));
       List<Placemark> placemarks =
           await placemarkFromCoordinates(position.latitude, position.longitude);
 

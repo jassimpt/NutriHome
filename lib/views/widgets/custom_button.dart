@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/helpers/colors.dart';
 
 class CustomButton extends StatelessWidget {
-  CustomButton(
+  const CustomButton(
       {super.key,
       required this.size,
       required this.buttonname,

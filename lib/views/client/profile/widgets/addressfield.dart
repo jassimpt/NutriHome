@@ -23,13 +23,13 @@ class AddressFields extends StatelessWidget {
           style: GoogleFonts.urbanist(
               fontSize: 20, fontWeight: FontWeight.bold, color: fontcolor),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         SizedBox(
           width: width,
           child: TextFormField(
-            style: TextStyle(color: fontcolor),
+            style: const TextStyle(color: fontcolor),
             controller: controller,
             maxLines: maxlines,
             decoration: InputDecoration(
