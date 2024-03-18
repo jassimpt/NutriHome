@@ -4,17 +4,13 @@ import 'package:lottie/lottie.dart';
 import 'package:nutrihome/controller/firestore_provider.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/views/client/cart/widgets/cart_items.dart';
+import 'package:nutrihome/views/client/checkout/checkout_screen.dart';
 import 'package:nutrihome/views/widgets/custom_long_button.dart';
 import 'package:provider/provider.dart';
 
-class CartScreen extends StatefulWidget {
+class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
-  @override
-  State<CartScreen> createState() => _CartScreenState();
-}
-
-class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -90,7 +86,13 @@ class _CartScreenState extends State<CartScreen> {
                         ),
                         CustomLongButton(
                           size: size,
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CheckOutScreen(),
+                                ));
+                          },
                           buttonname: "Proceed to checkout",
                         )
                       ],
