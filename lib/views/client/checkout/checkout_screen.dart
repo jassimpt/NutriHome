@@ -162,7 +162,9 @@ class CheckOutScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
+                CustomLongButton(
+                    size: size, onTap: () {}, buttonname: "Confirm your order")
               ],
             ),
           ),

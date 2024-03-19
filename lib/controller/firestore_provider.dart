@@ -33,8 +33,8 @@ class FirestoreProvider extends ChangeNotifier {
     }
   }
 
-  addProduct({required ProductsModel product, required String category}) {
-    return service.addProductAdmin(product, category);
+  addProduct({required ProductsModel product, required String name}) {
+    return service.addProductAdmin(product, name);
   }
 
   fetchAllCategories() {

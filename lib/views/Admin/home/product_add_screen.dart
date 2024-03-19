@@ -177,7 +177,7 @@ class ProductAddScreen extends StatelessWidget {
         serving: servingscontroller.text,
         totalservings: double.parse(totalservingscontroller.text),
         weight: weightcontroller.text);
-    pro.addProduct(product: product, category: categorycontroller.text);
+    pro.addProduct(product: product, name: namecontroller.text);
     Navigator.pop(context);
   }
 }

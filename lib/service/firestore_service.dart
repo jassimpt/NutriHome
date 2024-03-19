@@ -13,12 +13,9 @@ class FirestoreService {
   Reference storage = FirebaseStorage.instance.ref();
   String? downloadurl;
 
-  addProductAdmin(ProductsModel product, String category) async {
+  addProductAdmin(ProductsModel product, String name) async {
     try {
-      await firestore
-          .collection("products")
-          .doc(category)
-          .set(product.toJson());
+      await firestore.collection("products").doc(name).set(product.toJson());
     } catch (e) {
       throw Exception(e);
     }
