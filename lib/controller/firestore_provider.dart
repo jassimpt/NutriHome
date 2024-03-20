@@ -19,6 +19,12 @@ class FirestoreProvider extends ChangeNotifier {
   String searchQuery = "";
   int quantity = 1;
   String? downloadurl;
+  AddressModel? selectedAddress;
+
+  void addressSelector({required AddressModel address}) {
+    selectedAddress = address;
+    notifyListeners();
+  }
 
   fetchCurrentUser() async {
     try {

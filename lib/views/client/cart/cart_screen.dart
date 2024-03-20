@@ -90,7 +90,9 @@ class CartScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CheckOutScreen(),
+                                  builder: (context) => CheckOutScreen(
+                                    subTotal: totalAmount,
+                                  ),
                                 ));
                           },
                           buttonname: "Proceed to checkout",

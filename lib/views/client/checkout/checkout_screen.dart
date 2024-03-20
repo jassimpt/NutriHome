@@ -1,25 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lottie/lottie.dart';
 import 'package:nutrihome/controller/firestore_provider.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/model/cart_item_model.dart';
-import 'package:nutrihome/views/client/cart/widgets/cart_items.dart';
+import 'package:nutrihome/service/payment_service.dart';
 import 'package:nutrihome/views/client/checkout/widgets/checkout_address_section.dart';
 import 'package:nutrihome/views/client/checkout/widgets/checkout_payment_section.dart';
 import 'package:nutrihome/views/client/checkout/widgets/checkout_text_row.dart';
 import 'package:nutrihome/views/widgets/custom_long_button.dart';
 import 'package:provider/provider.dart';
 
-class CheckOutScreen extends StatelessWidget {
-  const CheckOutScreen({super.key});
+class CheckOutScreen extends StatefulWidget {
+  const CheckOutScreen({super.key, required this.subTotal});
+
+  final dynamic subTotal;
+
+  @override
+  State<CheckOutScreen> createState() => _CheckOutScreenState();
+}
+
+class _CheckOutScreenState extends State<CheckOutScreen> {
+  PaymentService service = PaymentService();
+
+  @override
+  void dispose() {
+    super.dispose();
+    service.razorpay.clear();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    service.initialize();
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final pro = Provider.of<FirestoreProvider>(context, listen: true);
 
     return Scaffold(
       appBar: AppBar(
@@ -111,8 +128,8 @@ class CheckOutScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(10.0),
                       child: Column(
                         children: [
-                          const CheckOutTextRow(
-                            amount: "5000",
+                          CheckOutTextRow(
+                            amount: widget.subTotal.toString(),
                             text: "Subtotal",
                           ),
                           SizedBox(
@@ -135,7 +152,7 @@ class CheckOutScreen extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                "10000",
+                                widget.subTotal.toString(),
                                 style: GoogleFonts.poppins(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -164,12 +181,20 @@ class CheckOutScreen extends StatelessWidget {
                   ),
                 ),
                 CustomLongButton(
-                    size: size, onTap: () {}, buttonname: "Confirm your order")
+                    size: size,
+                    onTap: () {
+                      checkOut();
+                    },
+                    buttonname: "Confirm your order")
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  void checkOut() {
+    service.openCheckOut(amount: widget.subTotal);
   }
 }
