@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:nutrihome/model/address_model.dart';
 import 'package:nutrihome/model/cart_item_model.dart';
+import 'package:nutrihome/model/order_model.dart';
 import 'package:nutrihome/model/products_model.dart';
 import 'package:nutrihome/model/user_model.dart';
 
@@ -142,6 +143,15 @@ class FirestoreService {
           .collection('address')
           .doc(landmark)
           .update(address.toJson());
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  void orderProduct(
+      {required String orderId, required OrderModel order}) async {
+    try {
+      await firestore.collection("orders").doc(orderId).set(order.toJson());
     } catch (e) {
       throw Exception(e);
     }

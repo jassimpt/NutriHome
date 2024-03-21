@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nutrihome/controller/firestore_provider.dart';
+import 'package:nutrihome/controller/payment_controller.dart';
 import 'package:nutrihome/helpers/colors.dart';
 import 'package:nutrihome/model/cart_item_model.dart';
+import 'package:nutrihome/model/order_model.dart';
 import 'package:nutrihome/service/payment_service.dart';
 import 'package:nutrihome/views/client/checkout/widgets/checkout_address_section.dart';
 import 'package:nutrihome/views/client/checkout/widgets/checkout_payment_section.dart';
@@ -194,7 +196,45 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     );
   }
 
-  void checkOut() {
-    service.openCheckOut(amount: widget.subTotal);
+  void checkOut() async {
+    final paypro = Provider.of<PaymentController>(context, listen: false);
+    final pro = Provider.of<FirestoreProvider>(context, listen: false);
+
+    if (paypro.paymentmethod == 'Razorpay') {
+      final paymentStatus = await service.openCheckOut(amount: widget.subTotal);
+      print(paymentStatus);
+      if (paymentStatus == "Success") {
+        String orderId = pro.generateOrderId();
+        final OrderModel order = OrderModel(
+          orderid: orderId,
+          address: pro.selectedAddress,
+          orderStatus: pro.orderStatus,
+          paymentMethod: paypro.paymentmethod,
+          paymentStatus: paymentStatus,
+          product: pro.cartlist,
+          totalAmount: widget.subTotal.toString(),
+          user: pro.currentUser,
+        );
+
+        pro.productOrder(orderId: orderId, order: order);
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Payment Error'),
+            content:
+                const Text('Payment was not successful. Please try again.'),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    } else {}
   }
 }

@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nutrihome/model/address_model.dart';
 import 'package:nutrihome/model/cart_item_model.dart';
+import 'package:nutrihome/model/order_model.dart';
 import 'package:nutrihome/model/products_model.dart';
 import 'package:nutrihome/model/user_model.dart';
 import 'package:nutrihome/service/firestore_service.dart';
@@ -20,6 +23,7 @@ class FirestoreProvider extends ChangeNotifier {
   int quantity = 1;
   String? downloadurl;
   AddressModel? selectedAddress;
+  String orderStatus = "processing";
 
   void addressSelector({required AddressModel address}) {
     selectedAddress = address;
@@ -236,5 +240,19 @@ class FirestoreProvider extends ChangeNotifier {
 
   updateUserAddress({required String landmark, required AddressModel address}) {
     return service.updateUserAddress(landmark: landmark, address: address);
+  }
+
+  void productOrder({required String orderId, required OrderModel order}) {
+    return service.orderProduct(orderId: orderId, order: order);
+  }
+
+  String generateOrderId() {
+    const String chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+    Random random = Random();
+    String orderid = "";
+    for (var i = 0; i < 6; i++) {
+      orderid += chars[random.nextInt(chars.length)];
+    }
+    return orderid;
   }
 }

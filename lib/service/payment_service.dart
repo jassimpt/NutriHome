@@ -1,12 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_icon_snackbar/flutter_icon_snackbar.dart';
+import 'dart:async';
+
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class PaymentService {
   late Razorpay razorpay;
+  late Completer<String> _paymentStatusCompleter;
 
-  void openCheckOut({required int amount}) async {
+  PaymentService() {
+    _paymentStatusCompleter = Completer<String>();
+    initialize();
+  }
+
+  Future<String> openCheckOut({required int amount}) async {
     var options = {
       "key": "rzp_test_gHlHVIOJ6S5KQ4",
       "amount": amount * 100,
@@ -18,6 +24,7 @@ class PaymentService {
     };
     try {
       razorpay.open(options);
+      return _paymentStatusCompleter.future;
     } catch (e) {
       throw Exception(e);
     }
@@ -25,17 +32,21 @@ class PaymentService {
 
   void handlePaymentSuccess(PaymentSuccessResponse response) {
     Fluttertoast.showToast(msg: "Payment Success: ${response.paymentId}");
+    _paymentStatusCompleter.complete("Success");
   }
 
   void handlePaymentError(PaymentFailureResponse response) {
     Fluttertoast.showToast(msg: "Payment Failed: ${response.message}");
+    if (!_paymentStatusCompleter.isCompleted) {
+      _paymentStatusCompleter.complete("Failed");
+    }
   }
 
   void handleExternalWallet(ExternalWalletResponse response) {
     Fluttertoast.showToast(msg: "external wallet: ${response.walletName}");
   }
 
-  initialize() {
+  void initialize() {
     razorpay = Razorpay();
     razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS, handlePaymentSuccess);
     razorpay.on(Razorpay.EVENT_PAYMENT_ERROR, handlePaymentError);
