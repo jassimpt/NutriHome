@@ -17,6 +17,8 @@ class FirestoreProvider extends ChangeNotifier {
   List<ProductsModel> searchedproducts = [];
   List<AddressModel> addresslist = [];
   List<String> categorieslist = [];
+  List<OrderModel> orderslist = [];
+  List<OrderModel> myOrdersList = [];
   String? selectedCategory;
   UserModel? currentUser;
   String searchQuery = "";
@@ -254,5 +256,37 @@ class FirestoreProvider extends ChangeNotifier {
       orderid += chars[random.nextInt(chars.length)];
     }
     return orderid;
+  }
+
+  Future<List<OrderModel>> fetchAllOrders() async {
+    try {
+      service.firestore.collection("orders").snapshots().listen((order) {
+        orderslist =
+            order.docs.map((doc) => OrderModel.fromJson(doc.data())).toList();
+        notifyListeners();
+      });
+      return orderslist;
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  List<OrderModel> fetchCurrentUserOrder() {
+    try {
+      service.firestore
+          .collection("users")
+          .doc(service.auth.currentUser!.uid)
+          .collection("my_orders")
+          .snapshots()
+          .listen((order) {
+        myOrdersList = order.docs
+            .map((orderItem) => OrderModel.fromJson(orderItem.data()))
+            .toList();
+        notifyListeners();
+      });
+      return myOrdersList;
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 }

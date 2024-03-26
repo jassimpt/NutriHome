@@ -152,6 +152,12 @@ class FirestoreService {
       {required String orderId, required OrderModel order}) async {
     try {
       await firestore.collection("orders").doc(orderId).set(order.toJson());
+      await firestore
+          .collection("users")
+          .doc(auth.currentUser!.uid)
+          .collection("my_orders")
+          .doc(orderId)
+          .set(order.toJson());
     } catch (e) {
       throw Exception(e);
     }

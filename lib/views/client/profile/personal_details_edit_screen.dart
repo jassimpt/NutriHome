@@ -13,7 +13,6 @@ import 'package:provider/provider.dart';
 
 class PersonalDetailsEditScreen extends StatefulWidget {
   const PersonalDetailsEditScreen({super.key, required this.currentuser});
-
   final UserModel currentuser;
 
   @override
